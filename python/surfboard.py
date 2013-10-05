@@ -38,7 +38,8 @@ class SignalData(object):
 
     def downstream_channels(self):
         tds = self.downstream_channel_row().find_all('td')[1:]
-        return [td.text.strip() for td in tds]
+        chans = [strip_lower(td.text) for td in tds]
+        return map(int, chans)
 
     def downstream_freqs_row(self):
         try:

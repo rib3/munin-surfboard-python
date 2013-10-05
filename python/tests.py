@@ -8,7 +8,7 @@ class SignalDataTestCase(TestCase):
     #source_file = 'cmSignalData.htm.1'
     source_file = 'working.htm'
 
-    channels = ['144', '141', '142', '143']
+    channels = [144, 141, 142, 143]
 
     @classmethod
     def setUpClass(cls):
