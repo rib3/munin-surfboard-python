@@ -41,15 +41,16 @@ class SignalData(object):
         chans = [strip_lower(td.text) for td in tds]
         return map(int, chans)
 
-    def downstream_freqs_row(self):
+    def downstream_freq_row(self):
         try:
             return self.downstream_rows()[2]
         except IndexError:
             pass
 
     def downstream_freqs(self):
-        tds = self.downstream_freqs_row().find_all('td')[1:]
-        return [td.text.strip() for td in tds]
+        tds = self.downstream_freq_row().find_all('td')[1:]
+        freqs = [strip_lower(td.text.split(' ')[0]) for td in tds]
+        return map(int, freqs)
 
 
 def load_data(source, parser=None):

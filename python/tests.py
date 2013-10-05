@@ -9,6 +9,7 @@ class SignalDataTestCase(TestCase):
     source_file = 'working.htm'
 
     channels = [144, 141, 142, 143]
+    freqs = [699000000, 681000000, 687000000, 693000000]
 
     @classmethod
     def setUpClass(cls):
@@ -44,3 +45,14 @@ class SignalDataTestCase(TestCase):
         channels = self.signal_data.downstream_channels()
         self.assertIsNotNone(channels)
         self.assertEquals(self.channels, channels)
+
+    def test_downstream_freq_row(self):
+        row = self.signal_data.downstream_freq_row()
+        self.assertIsNotNone(row)
+        self.assertEqual('Frequency'.lower(),
+                         strip_lower(row.find('td').text))
+
+    def test_downstream_freqs(self):
+        freqs = self.signal_data.downstream_freqs()
+        self.assertIsNotNone(freqs)
+        self.assertEquals(self.freqs, freqs)
