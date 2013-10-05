@@ -12,6 +12,10 @@ def strip_lower(text):
 def has_text(elem, text):
     return strip_lower(elem.text) == strip_lower(text)
 
+def intify_text(elems, split=None):
+    nums = [strip_lower(elem.text) for elem in elems]
+    return map(int, nums)
+
 class SignalData(object):
     def __init__(self, html):
         self.soup = load_data(html)
@@ -38,8 +42,7 @@ class SignalData(object):
 
     def downstream_channels(self):
         tds = self.downstream_channel_row().find_all('td')[1:]
-        chans = [strip_lower(td.text) for td in tds]
-        return map(int, chans)
+        return intify_text(tds)
 
     def downstream_freq_row(self):
         try:
