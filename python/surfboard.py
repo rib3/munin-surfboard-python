@@ -13,8 +13,13 @@ def has_text(elem, text):
     return strip_lower(elem.text) == strip_lower(text)
 
 def intify_text(elems, split=None):
-    nums = [strip_lower(elem.text) for elem in elems]
-    return map(int, nums)
+    nums = []
+    for elem in elems:
+        num = strip_lower(elem.text)
+        if split is not None:
+            num = num.split(split, 1)[0]
+        nums.append(int(num))
+    return nums
 
 class SignalData(object):
     def __init__(self, html):
@@ -52,8 +57,7 @@ class SignalData(object):
 
     def downstream_freqs(self):
         tds = self.downstream_freq_row().find_all('td')[1:]
-        freqs = [strip_lower(td.text.split(' ')[0]) for td in tds]
-        return map(int, freqs)
+        return intify_text(tds, ' ')
 
 
 def load_data(source, parser=None):
