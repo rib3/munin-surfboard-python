@@ -7,7 +7,10 @@ from lxml import html as lxhtml
 
 def strip_lower(text):
     if text is not None:
-        text = text.strip().lower()
+        try:
+            text = text.strip().lower()
+        except:
+            return None
     return text
 
 def has_text(elem, text):
