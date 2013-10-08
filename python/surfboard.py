@@ -3,6 +3,7 @@
 from bs4 import BeautifulSoup
 from functools import partial
 from xml.etree import ElementTree as ET
+from lxml import html as lxhtml
 
 def strip_lower(text):
     if text is not None:
@@ -25,6 +26,7 @@ class SignalData(object):
     def __init__(self, html):
         self.soup = load_data(html)
         #self.soup = load_data(html, "lxml")
+        self.lxml = lxhtml.fromstring(str(self.soup))
 
     def center(self):
         return self.soup.body.center
@@ -33,8 +35,13 @@ class SignalData(object):
         return self.center.table.tbody
 
     def downstream_table(self):
-        header = self.soup.find(partial(has_text, text='Downstream'))
-        return header.parent.parent.parent
+        downstreams = self.lxml.xpath('//table'
+            '//*[contains(text(), "Downstream")]')
+        if downstreams:
+            tables = downstreams[0].xpath('./ancestor::table')
+            if tables:
+                # Return "closest" table
+                return tables[-1]
 
     def downstream_rows(self):
         return self.downstream_table().find_all('tr')

@@ -1,7 +1,11 @@
 from unittest import TestCase
 from surfboard import SignalData, strip_lower
+from xml.etree import ElementTree as ET
 
 __all__ = ('SignalDataTestCase', )
+
+def ts_lower(elem):
+    return ET.tostring(elem).lower()
 
 class SignalDataTestCase(TestCase):
     source_dir = ('..', 'testdata', )
@@ -29,8 +33,8 @@ class SignalDataTestCase(TestCase):
     def test_downstream_table(self):
         table = self.signal_data.downstream_table()
         self.assertIsNotNone(table)
-        self.assertEqual('table', table.name)
-        test_text = table.tbody.tr.text.lower()
+        self.assertEqual('table', table.tag)
+        test_text = ts_lower(table.xpath('./tbody/tr')[0])
         #\nDownstream \nBonding Channel Value
         self.assertTrue('downstream' in test_text)
         self.assertTrue('bonding channel' in test_text)
