@@ -35,6 +35,11 @@ def get_table(lxml, header):
             # Return "closest" table
             return tables[-1]
 
+def table_getter(header):
+    def func(self):
+        return get_table(self.lxml, header)
+    return func
+
 def get_row(table, header):
     if table is not None:
         xpath = './/td[{}]'.format(contains(header))
@@ -72,8 +77,7 @@ class SignalData(object):
     def downstream_table(self):
         return self.center.table.tbody
 
-    def downstream_table(self):
-        return get_table(self.lxml, 'downstream')
+    downstream_table = table_getter('downstream')
 
     downstream_channel_row = row_getter('downstream_table', 'channel')
     downstream_channels = field_getter('downstream_table', 'channel')
