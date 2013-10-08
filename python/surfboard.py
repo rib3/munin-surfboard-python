@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from functools import partial
 from xml.etree import ElementTree as ET
 from lxml import html as lxhtml
+import sys
 
 def strip_lower(text):
     """strip() and lower() text."""
@@ -53,10 +54,9 @@ def get_row(table, header):
         if tds:
             return tds[0].getparent()
 
-def row_getter(table_getter, header):
+def row_getter(table, header):
     def func(self):
-        table = getattr(self, table_getter)()
-        return get_row(table, header)
+        return get_row(get_table(self.lxml, table), header)
     return func
 
 def get_fields(table, header, split=None):
@@ -66,10 +66,9 @@ def get_fields(table, header, split=None):
         tds = row.xpath('./td')[1:]
         return intify_text(tds, split)
 
-def field_getter(table_getter, header, split=None):
+def field_getter(table, header, split=None):
     def func(self):
-        table = getattr(self, table_getter)()
-        return get_fields(table, header, split)
+        return get_fields(get_table(self.lxml, table), header, split)
     return func
 
 class SignalData(object):
@@ -84,20 +83,41 @@ class SignalData(object):
     def downstream_table(self):
         return self.center.table.tbody
 
-    downstream_table = table_getter('downstream')
+    DOWNSTREAM = 'downstream'
 
-    downstream_channel_row = row_getter('downstream_table', 'channel')
-    downstream_channels = field_getter('downstream_table', 'channel')
+    downstream_table = table_getter(DOWNSTREAM)
 
-    downstream_freq_row = row_getter('downstream_table', 'frequency')
-    downstream_freqs = field_getter('downstream_table', 'frequency', ' ')
+    downstream_channel_row = row_getter(DOWNSTREAM, 'channel')
+    downstream_channels = field_getter(DOWNSTREAM, 'channel')
 
-    downstream_snr_row = row_getter('downstream_table', 'signal to noise')
-    downstream_snrs = field_getter('downstream_table', 'signal to noise', ' ')
+    downstream_freq_row = row_getter(DOWNSTREAM, 'frequency')
+    downstream_freqs = field_getter(DOWNSTREAM, 'frequency', ' ')
 
-    downstream_power_row = row_getter('downstream_table', 'power level')
-    downstream_powers = field_getter('downstream_table', 'power level', ' ')
+    downstream_snr_row = row_getter(DOWNSTREAM, 'signal to noise')
+    downstream_snrs = field_getter(DOWNSTREAM, 'signal to noise', ' ')
+
+    downstream_power_row = row_getter(DOWNSTREAM, 'power level')
+    downstream_powers = field_getter(DOWNSTREAM, 'power level', ' ')
+
 
 def load_data(source, parser=None):
     with open(source) as content:
         return BeautifulSoup(content.read(), parser)
+
+def main():
+    html = sys.argv[1]
+    data = SignalData(html)
+
+    info = (
+        ('downstream', ('channel', 'freq', 'snr', 'power')),
+        #('upstream', ('channel', 'freqs', 'snr', 'power')),
+    )
+
+    for section, subs in info:
+        print "{}:".format(section)
+        for sub in subs:
+            method = '{}_{}s'.format(section, sub)
+            print "\t{}: {}".format(sub, getattr(data, method)())
+
+if __name__ == '__main__':
+    main()
