@@ -44,17 +44,20 @@ class SignalData(object):
                 return tables[-1]
 
     def downstream_rows(self):
-        return self.downstream_table().find_all('tr')
+        return self.downstream_table().xpath('.//tr')
 
     def downstream_channel_row(self):
-        try:
-            return self.downstream_rows()[1]
-        except IndexError:
-            pass
+        table = self.downstream_table()
+        if table is not None:
+            tds = table.xpath('.//td[contains(text(), "channel")]')
+            if tds:
+                return tds[0].getparent()
 
     def downstream_channels(self):
-        tds = self.downstream_channel_row().find_all('td')[1:]
-        return intify_text(tds)
+        row = self.downstream_channel_row()
+        if row is not None:
+            tds = row.xpath('.//td')[1:]
+            return intify_text(tds)
 
     def downstream_freq_row(self):
         try:
@@ -63,7 +66,7 @@ class SignalData(object):
             pass
 
     def downstream_freqs(self):
-        tds = self.downstream_freq_row().find_all('td')[1:]
+        tds = self.downstream_freq_row().xpath('.//td')[1:]
         return intify_text(tds, ' ')
 
 
