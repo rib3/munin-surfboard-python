@@ -14,6 +14,7 @@ class SignalDataTestCase(TestCase):
 
     channels = [144, 141, 142, 143]
     freqs = [699000000, 681000000, 687000000, 693000000]
+    snrs = [34, 35, 35, 34]
     powers = [-11, -9, -9, -10]
 
     @classmethod
@@ -61,6 +62,17 @@ class SignalDataTestCase(TestCase):
         freqs = self.signal_data.downstream_freqs()
         self.assertIsNotNone(freqs)
         self.assertEquals(self.freqs, freqs)
+
+    def test_downstream_snr_row(self):
+        row = self.signal_data.downstream_snr_row()
+        self.assertIsNotNone(row)
+        self.assertEqual(strip_lower('Signal to Noise Ratio'),
+                         strip_lower(row.find('td').text))
+
+    def test_downstream_snrs(self):
+        snrs = self.signal_data.downstream_snrs()
+        self.assertIsNotNone(snrs)
+        self.assertEquals(self.snrs, snrs)
 
     def test_downstream_power_row(self):
         row = self.signal_data.downstream_power_row()

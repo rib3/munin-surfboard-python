@@ -92,6 +92,9 @@ class SignalData(object):
     downstream_freq_row = row_getter('downstream_table', 'frequency')
     downstream_freqs = field_getter('downstream_table', 'frequency', ' ')
 
+    downstream_snr_row = row_getter('downstream_table', 'signal to noise')
+    downstream_snrs = field_getter('downstream_table', 'signal to noise', ' ')
+
     downstream_power_row = row_getter('downstream_table', 'power level')
     downstream_powers = field_getter('downstream_table', 'power level', ' ')
 
