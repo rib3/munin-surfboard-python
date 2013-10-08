@@ -92,6 +92,9 @@ class SignalData(object):
     downstream_freq_row = row_getter('downstream_table', 'frequency')
     downstream_freqs = field_getter('downstream_table', 'frequency', ' ')
 
+    downstream_power_row = row_getter('downstream_table', 'power level')
+    downstream_powers = field_getter('downstream_table', 'power level', ' ')
+
 def load_data(source, parser=None):
     with open(source) as content:
         return BeautifulSoup(content.read(), parser)

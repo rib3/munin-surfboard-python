@@ -14,6 +14,7 @@ class SignalDataTestCase(TestCase):
 
     channels = [144, 141, 142, 143]
     freqs = [699000000, 681000000, 687000000, 693000000]
+    powers = [-11, -9, -9, -10]
 
     @classmethod
     def setUpClass(cls):
@@ -60,3 +61,14 @@ class SignalDataTestCase(TestCase):
         freqs = self.signal_data.downstream_freqs()
         self.assertIsNotNone(freqs)
         self.assertEquals(self.freqs, freqs)
+
+    def test_downstream_power_row(self):
+        row = self.signal_data.downstream_power_row()
+        self.assertIsNotNone(row)
+        self.assertEqual('Power Level'.lower(),
+                         strip_lower(row.find('td').text))
+
+    def test_downstream_powers(self):
+        powers = self.signal_data.downstream_powers()
+        self.assertIsNotNone(powers)
+        self.assertEquals(self.powers, powers)
