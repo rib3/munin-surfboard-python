@@ -26,6 +26,15 @@ def contains(text):
     """Generate an xpath contains() for text."""
     return 'contains(text(), "{}")'.format(text)
 
+def get_table(lxml, header):
+    """Get a table via header text."""
+    headers = lxml.xpath('//table//*[{}]'.format(contains(header)))
+    if headers:
+        tables = headers[0].xpath('./ancestor::table')
+        if tables:
+            # Return "closest" table
+            return tables[-1]
+
 def get_row(table, header):
     if table is not None:
         xpath = './/td[{}]'.format(contains(header))
@@ -64,13 +73,7 @@ class SignalData(object):
         return self.center.table.tbody
 
     def downstream_table(self):
-        downstreams = self.lxml.xpath('//table'
-            '//*[contains(text(), "downstream")]')
-        if downstreams:
-            tables = downstreams[0].xpath('./ancestor::table')
-            if tables:
-                # Return "closest" table
-                return tables[-1]
+        return get_table(self.lxml, 'downstream')
 
     downstream_channel_row = row_getter('downstream_table', 'channel')
     downstream_channels = field_getter('downstream_table', 'channel')
