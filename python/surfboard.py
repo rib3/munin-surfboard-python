@@ -26,7 +26,7 @@ class SignalData(object):
     def __init__(self, html):
         self.soup = load_data(html)
         #self.soup = load_data(html, "lxml")
-        self.lxml = lxhtml.fromstring(str(self.soup))
+        self.lxml = lxhtml.fromstring(str(self.soup).lower())
 
     def center(self):
         return self.soup.body.center
@@ -36,7 +36,7 @@ class SignalData(object):
 
     def downstream_table(self):
         downstreams = self.lxml.xpath('//table'
-            '//*[contains(text(), "Downstream")]')
+            '//*[contains(text(), "downstream")]')
         if downstreams:
             tables = downstreams[0].xpath('./ancestor::table')
             if tables:
