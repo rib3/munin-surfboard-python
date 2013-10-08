@@ -63,7 +63,7 @@ def get_fields(table, header, split=None):
     """Get a fields for a row specified by their header text."""
     row = get_row(table, header)
     if row is not None:
-        tds = row.xpath('.//td')[1:]
+        tds = row.xpath('./td')[1:]
         return intify_text(tds, split)
 
 def field_getter(table_getter, header, split=None):
