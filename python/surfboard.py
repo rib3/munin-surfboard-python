@@ -60,15 +60,17 @@ class SignalData(object):
             return intify_text(tds)
 
     def downstream_freq_row(self):
-        try:
-            return self.downstream_rows()[2]
-        except IndexError:
-            pass
+        table = self.downstream_table()
+        if table is not None:
+            tds = table.xpath('.//td[contains(text(), "frequency")]')
+            if tds:
+                return tds[0].getparent()
 
     def downstream_freqs(self):
-        tds = self.downstream_freq_row().xpath('.//td')[1:]
-        return intify_text(tds, ' ')
-
+        row = self.downstream_freq_row()
+        if row is not None:
+            tds = row.xpath('.//td')[1:]
+            return intify_text(tds, ' ')
 
 def load_data(source, parser=None):
     with open(source) as content:
