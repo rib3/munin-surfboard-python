@@ -22,6 +22,31 @@ def intify_text(elems, split=None):
         nums.append(int(num))
     return nums
 
+def get_row(table, header):
+    if table is not None:
+        xpath = './/td[contains(text(), "{}")]'.format(header)
+        tds = table.xpath(xpath)
+        if tds:
+            return tds[0].getparent()
+
+def row_getter(table_getter, header):
+    def func(self):
+        table = getattr(self, table_getter)()
+        return get_row(table, header)
+    return func
+
+def get_fields(table, header, split=None):
+    row = get_row(table, header)
+    if row is not None:
+        tds = row.xpath('.//td')[1:]
+        return intify_text(tds, split)
+
+def field_getter(table_getter, header, split=None):
+    def func(self):
+        table = getattr(self, table_getter)()
+        return get_fields(table, header, split)
+    return func
+
 class SignalData(object):
     def __init__(self, html):
         self.soup = load_data(html)
@@ -43,31 +68,11 @@ class SignalData(object):
                 # Return "closest" table
                 return tables[-1]
 
-    def downstream_channel_row(self):
-        table = self.downstream_table()
-        if table is not None:
-            tds = table.xpath('.//td[contains(text(), "channel")]')
-            if tds:
-                return tds[0].getparent()
+    downstream_channel_row = row_getter('downstream_table', 'channel')
+    downstream_channels = field_getter('downstream_table', 'channel')
 
-    def downstream_channels(self):
-        row = self.downstream_channel_row()
-        if row is not None:
-            tds = row.xpath('.//td')[1:]
-            return intify_text(tds)
-
-    def downstream_freq_row(self):
-        table = self.downstream_table()
-        if table is not None:
-            tds = table.xpath('.//td[contains(text(), "frequency")]')
-            if tds:
-                return tds[0].getparent()
-
-    def downstream_freqs(self):
-        row = self.downstream_freq_row()
-        if row is not None:
-            tds = row.xpath('.//td')[1:]
-            return intify_text(tds, ' ')
+    downstream_freq_row = row_getter('downstream_table', 'frequency')
+    downstream_freqs = field_getter('downstream_table', 'frequency', ' ')
 
 def load_data(source, parser=None):
     with open(source) as content:
