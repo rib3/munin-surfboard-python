@@ -6,6 +6,7 @@ from xml.etree import ElementTree as ET
 from lxml import html as lxhtml
 
 def strip_lower(text):
+    """strip() and lower() text."""
     if text is not None:
         try:
             text = text.strip().lower()
@@ -41,6 +42,7 @@ def table_getter(header):
     return func
 
 def get_row(table, header):
+    """Get a row via it's header text."""
     if table is not None:
         xpath = './/td[{}]'.format(contains(header))
         tds = table.xpath(xpath)
@@ -54,6 +56,7 @@ def row_getter(table_getter, header):
     return func
 
 def get_fields(table, header, split=None):
+    """Get a fields for a row specified by their header text."""
     row = get_row(table, header)
     if row is not None:
         tds = row.xpath('.//td')[1:]
