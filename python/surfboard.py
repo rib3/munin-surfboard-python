@@ -22,9 +22,13 @@ def intify_text(elems, split=None):
         nums.append(int(num))
     return nums
 
+def contains(text):
+    """Generate an xpath contains() for text."""
+    return 'contains(text(), "{}")'.format(text)
+
 def get_row(table, header):
     if table is not None:
-        xpath = './/td[contains(text(), "{}")]'.format(header)
+        xpath = './/td[{}]'.format(contains(header))
         tds = table.xpath(xpath)
         if tds:
             return tds[0].getparent()
