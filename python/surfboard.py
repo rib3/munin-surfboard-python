@@ -43,9 +43,6 @@ class SignalData(object):
                 # Return "closest" table
                 return tables[-1]
 
-    def downstream_rows(self):
-        return self.downstream_table().xpath('.//tr')
-
     def downstream_channel_row(self):
         table = self.downstream_table()
         if table is not None:
