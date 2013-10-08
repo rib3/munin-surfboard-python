@@ -15,7 +15,7 @@ def strip_lower(text):
             return None
     return text
 
-def intify_text(elems, split=None):
+def convert_text(elems, func, split=None):
     """Take a list of elements and return their .text value as ints."""
     nums = []
     for elem in elems:
@@ -24,9 +24,12 @@ def intify_text(elems, split=None):
             num = strip_lower(num)
             if split is not None:
                 num = num.split(split, 1)[0]
-            num = int(num)
+            num = func(num)
         nums.append(num)
     return nums
+
+def intify_text(elems, split=None):
+    return convert_text(elems, int, split)
 
 def contains(text):
     """Generate an xpath contains() for text."""
@@ -59,16 +62,20 @@ def row_getter(table, header):
         return get_row(get_table(self.lxml, table), header)
     return func
 
-def get_fields(table, header, split=None):
+def get_fields(table, header, split=None, convert=None):
     """Get a fields for a row specified by their header text."""
     row = get_row(table, header)
     if row is not None:
         tds = row.xpath('./td')[1:]
-        return intify_text(tds, split)
+        if convert is not None:
+            return convert_text(tds, convert, split)
+        else:
+            return intify_text(tds, split)
 
-def field_getter(table, header, split=None):
+def field_getter(table, header, split=None, convert=None):
     def func(self):
-        return get_fields(get_table(self.lxml, table), header, split)
+        t = get_table(self.lxml, table)
+        return get_fields(t, header, split, convert)
     return func
 
 class SignalData(object):
