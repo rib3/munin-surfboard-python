@@ -13,9 +13,6 @@ def strip_lower(text):
             return None
     return text
 
-def has_text(elem, text):
-    return strip_lower(elem.text) == strip_lower(text)
-
 def intify_text(elems, split=None):
     nums = []
     for elem in elems:
