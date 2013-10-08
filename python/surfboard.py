@@ -15,6 +15,7 @@ def strip_lower(text):
     return text
 
 def intify_text(elems, split=None):
+    """Take a list of elements and return their .text value as ints."""
     nums = []
     for elem in elems:
         num = elem.text
