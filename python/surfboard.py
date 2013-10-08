@@ -48,7 +48,7 @@ def table_getter(header):
 def get_row(table, header):
     """Get a row via it's header text."""
     if table is not None:
-        xpath = './/td[{}]'.format(contains(header))
+        xpath = './tbody/tr/td[{}]'.format(contains(header))
         tds = table.xpath(xpath)
         if tds:
             return tds[0].getparent()
