@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from bs4 import BeautifulSoup
+from decimal import Decimal
 from functools import partial
 from xml.etree import ElementTree as ET
 from lxml import html as lxhtml
@@ -105,6 +106,25 @@ class SignalData(object):
 
     downstream_power_row = row_getter(DOWNSTREAM, 'power level')
     downstream_powers = field_getter(DOWNSTREAM, 'power level', ' ')
+
+    UPSTREAM = 'upstream'
+
+    upstream_table = table_getter(DOWNSTREAM)
+
+    upstream_channel_row = row_getter(UPSTREAM, 'channel')
+    upstream_channels = field_getter(UPSTREAM, 'channel')
+
+    upstream_freq_row = row_getter(UPSTREAM, 'frequency')
+    upstream_freqs = field_getter(UPSTREAM, 'frequency', ' ')
+
+    upstream_service_id_row = row_getter(UPSTREAM, 'service id')
+    upstream_service_ids = field_getter(UPSTREAM, 'service id')
+
+    upstream_rate_row = row_getter(UPSTREAM, 'symbol rate')
+    upstream_rates = field_getter(UPSTREAM, 'symbol rate', ' ', Decimal)
+
+    upstream_power_row = row_getter(UPSTREAM, 'power level')
+    upstream_powers = field_getter(UPSTREAM, 'power level', ' ')
 
 
 def load_data(source, parser=None):
