@@ -17,10 +17,13 @@ def strip_lower(text):
 def intify_text(elems, split=None):
     nums = []
     for elem in elems:
-        num = strip_lower(elem.text)
-        if split is not None:
-            num = num.split(split, 1)[0]
-        nums.append(int(num))
+        num = elem.text
+        if num is not None:
+            num = strip_lower(num)
+            if split is not None:
+                num = num.split(split, 1)[0]
+            num = int(num)
+        nums.append(num)
     return nums
 
 def contains(text):
