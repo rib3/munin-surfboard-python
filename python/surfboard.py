@@ -139,15 +139,17 @@ def main():
     data = SignalData(html)
 
     info = (
-        ('downstream', ('channel', 'freq', 'snr', 'power')),
-        #('upstream', ('channel', 'freqs', 'snr', 'power')),
+        ('downstream', ('channels', 'freqs', 'snrs', 'powers')),
+        ('upstream',
+            ('channels', 'service_ids', 'rates', 'powers', 'statuses')),
     )
 
     for section, subs in info:
         print "{}:".format(section)
         for sub in subs:
-            method = '{}_{}s'.format(section, sub)
-            print "\t{}: {}".format(sub, getattr(data, method)())
+            method = '{}_{}'.format(section, sub)
+            vals = getattr(data, method)()
+            print "\t{}: {}".format(sub, map(str, vals))
 
 if __name__ == '__main__':
     main()
