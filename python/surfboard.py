@@ -92,42 +92,50 @@ class SignalData(object):
         return self.center.table.tbody
 
     DOWN = 'downstream'
-
     down_table = table_getter(DOWN)
 
-    down_channel_row = row_getter(DOWN, 'channel')
-    down_channels = field_getter(DOWN, 'channel')
+    DOWN_CHANNEL = 'channel'
+    down_channel_row = row_getter(DOWN, DOWN_CHANNEL)
+    down_channels = field_getter(DOWN, DOWN_CHANNEL)
 
-    down_freq_row = row_getter(DOWN, 'frequency')
-    down_freqs = field_getter(DOWN, 'frequency', ' ')
+    DOWN_FREQ = 'frequency'
+    down_freq_row = row_getter(DOWN, DOWN_FREQ)
+    down_freqs = field_getter(DOWN, DOWN_FREQ, ' ')
 
-    down_snr_row = row_getter(DOWN, 'signal to noise')
-    down_snrs = field_getter(DOWN, 'signal to noise', ' ')
+    DOWN_SNR = 'signal to noise'
+    down_snr_row = row_getter(DOWN, DOWN_SNR)
+    down_snrs = field_getter(DOWN, DOWN_SNR, ' ')
 
-    down_power_row = row_getter(DOWN, 'power level')
-    down_powers = field_getter(DOWN, 'power level', ' ')
+    DOWN_POWER = 'power level'
+    down_power_row = row_getter(DOWN, DOWN_POWER)
+    down_powers = field_getter(DOWN, DOWN_POWER, ' ')
 
     UP = 'upstream'
-
     up_table = table_getter(UP)
 
-    up_channel_row = row_getter(UP, 'channel')
-    up_channels = field_getter(UP, 'channel')
+    UP_CHANNEL = 'channel'
+    up_channel_row = row_getter(UP, UP_CHANNEL)
+    up_channels = field_getter(UP, UP_CHANNEL)
 
-    up_freq_row = row_getter(UP, 'frequency')
-    up_freqs = field_getter(UP, 'frequency', ' ')
+    UP_FREQ = 'frequency'
+    up_freq_row = row_getter(UP, UP_FREQ)
+    up_freqs = field_getter(UP, UP_FREQ, ' ')
 
-    up_service_id_row = row_getter(UP, 'service id')
-    up_service_ids = field_getter(UP, 'service id')
+    UP_SERVICE_ID = 'service id'
+    up_service_id_row = row_getter(UP, UP_SERVICE_ID)
+    up_service_ids = field_getter(UP, UP_SERVICE_ID)
 
-    up_rate_row = row_getter(UP, 'symbol rate')
-    up_rates = field_getter(UP, 'symbol rate', ' ', Decimal)
+    UP_RATE = 'symbol rate'
+    up_rate_row = row_getter(UP, UP_RATE)
+    up_rates = field_getter(UP, UP_RATE, ' ', Decimal)
 
-    up_power_row = row_getter(UP, 'power level')
-    up_powers = field_getter(UP, 'power level', ' ')
+    UP_POWER = 'power level'
+    up_power_row = row_getter(UP, UP_POWER)
+    up_powers = field_getter(UP, UP_POWER, ' ')
 
-    up_status_row = row_getter(UP, 'ranging status')
-    up_statuses = field_getter(UP, 'ranging status', None, str)
+    UP_STATUS = 'ranging status'
+    up_status_row = row_getter(UP, UP_STATUS)
+    up_statuses = field_getter(UP, UP_STATUS, None, str)
 
 
 def load_data(source, parser=None):
