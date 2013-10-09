@@ -1,3 +1,4 @@
+from decimal import Decimal
 from unittest import TestCase
 from surfboard import SignalData, strip_lower
 from xml.etree import ElementTree as ET
@@ -31,6 +32,13 @@ class SignalDataTestCase(TestCase):
     down_freqs = [699000000, 681000000, 687000000, 693000000]
     down_snrs = [34, 35, 35, 34]
     down_powers = [-11, -9, -9, -10]
+
+    up_channels = [2, 1, 3]
+    up_freqs = [29000000, 36000000, 23000000]
+    up_service_ids = [49, 49, 49]
+    up_rates = [Decimal('5.120'), Decimal('5.120'), Decimal('2.560')]
+    up_powers = [51, 51, 51]
+    up_statuses = ['continue', 'aborted', 'aborted']
 
     @classmethod
     def setUpClass(cls):
@@ -99,3 +107,19 @@ class SignalDataTestCase(TestCase):
         powers = self.signal_data.down_powers()
         self.assertIsNotNone(powers)
         self.assertEquals(self.down_powers, powers)
+
+    test_up_channel_row = row_tester('up_channel', 'Channel ID')
+    test_up_channels = val_tester('up_channels')
+
+    test_up_freq_row = row_tester('up_freq', 'Frequency')
+    test_up_freqs = val_tester('up_freqs')
+
+    test_up_service_id_row = row_tester(
+            'up_service_id', 'Ranging Service ID')
+    test_up_service_ids = val_tester('up_service_ids')
+
+    test_up_rate_row = row_tester('up_rate', 'Symbol Rate')
+    test_up_rates = val_tester('up_rates')
+
+    test_up_status_row = row_tester('up_status', 'Ranging Status')
+    test_up_statuses = val_tester('up_statuses')
