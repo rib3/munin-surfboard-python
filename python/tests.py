@@ -7,6 +7,21 @@ __all__ = ('SignalDataTestCase', )
 def ts_lower(elem):
     return ET.tostring(elem).lower()
 
+def row_tester(name, header):
+    def func(self):
+        row = getattr(self.signal_data, '{}_row'.format(name))()
+        self.assertIsNotNone(row)
+        self.assertEqual(strip_lower(header),
+                         strip_lower(row.find('td').text))
+    return func
+
+def val_tester(name):
+    def func(self):
+        vals = getattr(self.signal_data, name)()
+        self.assertIsNotNone(vals)
+        self.assertEquals(getattr(self, name), vals)
+    return func
+
 class SignalDataTestCase(TestCase):
     source_dir = ('..', 'testdata', )
     #source_file = 'cmSignalData.htm.1'
