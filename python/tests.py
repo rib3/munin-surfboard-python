@@ -40,6 +40,11 @@ class SignalDataTestCase(TestCase):
     up_powers = [51, 51, 51]
     up_statuses = ['continue', 'aborted', 'aborted']
 
+    stats_channels = [144, 141, 142, 143]
+    stats_unerroreds = [1454013, 813636, 813638, 813641]
+    stats_correctables = [27, 47, 13, 10]
+    stats_uncorrectables = [1354, 664, 698, 701]
+
     @classmethod
     def setUpClass(cls):
         super(SignalDataTestCase, cls).setUpClass()
@@ -123,3 +128,33 @@ class SignalDataTestCase(TestCase):
 
     test_up_status_row = row_tester('up_status', 'Ranging Status')
     test_up_statuses = val_tester('up_statuses')
+
+    #########
+    # STATS #
+    #########
+    def test_stats_table(self):
+        table = self.signal_data.stats_table()
+        self.assertIsNotNone(table)
+        self.assertEqual('table', table.tag)
+        test_text = ts_lower(table.xpath('./tbody/tr')[0])
+        # check for table (header) text
+        self.assertTrue('signal stats (codewords)' in test_text)
+        self.assertTrue('bonding channel' in test_text)
+
+    test_stats_channel_row = row_tester('stats_channel', 'Channel ID')
+    test_stats_channels = val_tester('stats_channels')
+
+    stats_correctable = [27, 47, 13, 10]
+    stats_uncorrectable = [1354, 664, 698, 701]
+
+    test_stats_unerrored_row = row_tester(
+            'stats_unerrored', 'Total Unerrored Codewords')
+    test_stats_unerroreds = val_tester('stats_unerroreds')
+
+    test_stats_correctable_row = row_tester(
+            'stats_correctable', 'Total Correctable Codewords')
+    test_stats_correctables = val_tester('stats_correctables')
+
+    test_stats_uncorrectable_row = row_tester(
+            'stats_uncorrectable', 'Total Uncorrectable Codewords')
+    test_stats_uncorrectables = val_tester('stats_uncorrectables')
