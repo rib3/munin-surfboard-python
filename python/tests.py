@@ -32,8 +32,8 @@ class SignalDataTestCase(TestCase):
     def test_signal_data(self):
         self.assertIsNotNone(self.signal_data)
 
-    def test_downstream_table(self):
-        table = self.signal_data.downstream_table()
+    def test_down_table(self):
+        table = self.signal_data.down_table()
         self.assertIsNotNone(table)
         self.assertEqual('table', table.tag)
         test_text = ts_lower(table.xpath('./tbody/tr')[0])
@@ -41,46 +41,46 @@ class SignalDataTestCase(TestCase):
         self.assertTrue('downstream' in test_text)
         self.assertTrue('bonding channel' in test_text)
 
-    def test_downstream_channel_row(self):
-        row = self.signal_data.downstream_channel_row()
+    def test_down_channel_row(self):
+        row = self.signal_data.down_channel_row()
         self.assertIsNotNone(row)
         self.assertEqual('Channel ID'.lower(),
                          strip_lower(row.find('td').text))
 
-    def test_downstream_channels(self):
-        channels = self.signal_data.downstream_channels()
+    def test_down_channels(self):
+        channels = self.signal_data.down_channels()
         self.assertIsNotNone(channels)
         self.assertEquals(self.channels, channels)
 
-    def test_downstream_freq_row(self):
-        row = self.signal_data.downstream_freq_row()
+    def test_down_freq_row(self):
+        row = self.signal_data.down_freq_row()
         self.assertIsNotNone(row)
         self.assertEqual('Frequency'.lower(),
                          strip_lower(row.find('td').text))
 
-    def test_downstream_freqs(self):
-        freqs = self.signal_data.downstream_freqs()
+    def test_down_freqs(self):
+        freqs = self.signal_data.down_freqs()
         self.assertIsNotNone(freqs)
         self.assertEquals(self.freqs, freqs)
 
-    def test_downstream_snr_row(self):
-        row = self.signal_data.downstream_snr_row()
+    def test_down_snr_row(self):
+        row = self.signal_data.down_snr_row()
         self.assertIsNotNone(row)
         self.assertEqual(strip_lower('Signal to Noise Ratio'),
                          strip_lower(row.find('td').text))
 
-    def test_downstream_snrs(self):
-        snrs = self.signal_data.downstream_snrs()
+    def test_down_snrs(self):
+        snrs = self.signal_data.down_snrs()
         self.assertIsNotNone(snrs)
         self.assertEquals(self.snrs, snrs)
 
-    def test_downstream_power_row(self):
-        row = self.signal_data.downstream_power_row()
+    def test_down_power_row(self):
+        row = self.signal_data.down_power_row()
         self.assertIsNotNone(row)
         self.assertEqual('Power Level'.lower(),
                          strip_lower(row.find('td').text))
 
-    def test_downstream_powers(self):
-        powers = self.signal_data.downstream_powers()
+    def test_down_powers(self):
+        powers = self.signal_data.down_powers()
         self.assertIsNotNone(powers)
         self.assertEquals(self.powers, powers)

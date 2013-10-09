@@ -91,43 +91,43 @@ class SignalData(object):
     def downstream_table(self):
         return self.center.table.tbody
 
-    DOWNSTREAM = 'downstream'
+    DOWN = 'downstream'
 
-    downstream_table = table_getter(DOWNSTREAM)
+    down_table = table_getter(DOWN)
 
-    downstream_channel_row = row_getter(DOWNSTREAM, 'channel')
-    downstream_channels = field_getter(DOWNSTREAM, 'channel')
+    down_channel_row = row_getter(DOWN, 'channel')
+    down_channels = field_getter(DOWN, 'channel')
 
-    downstream_freq_row = row_getter(DOWNSTREAM, 'frequency')
-    downstream_freqs = field_getter(DOWNSTREAM, 'frequency', ' ')
+    down_freq_row = row_getter(DOWN, 'frequency')
+    down_freqs = field_getter(DOWN, 'frequency', ' ')
 
-    downstream_snr_row = row_getter(DOWNSTREAM, 'signal to noise')
-    downstream_snrs = field_getter(DOWNSTREAM, 'signal to noise', ' ')
+    down_snr_row = row_getter(DOWN, 'signal to noise')
+    down_snrs = field_getter(DOWN, 'signal to noise', ' ')
 
-    downstream_power_row = row_getter(DOWNSTREAM, 'power level')
-    downstream_powers = field_getter(DOWNSTREAM, 'power level', ' ')
+    down_power_row = row_getter(DOWN, 'power level')
+    down_powers = field_getter(DOWN, 'power level', ' ')
 
-    UPSTREAM = 'upstream'
+    UP = 'upstream'
 
-    upstream_table = table_getter(DOWNSTREAM)
+    up_table = table_getter(UP)
 
-    upstream_channel_row = row_getter(UPSTREAM, 'channel')
-    upstream_channels = field_getter(UPSTREAM, 'channel')
+    up_channel_row = row_getter(UP, 'channel')
+    up_channels = field_getter(UP, 'channel')
 
-    upstream_freq_row = row_getter(UPSTREAM, 'frequency')
-    upstream_freqs = field_getter(UPSTREAM, 'frequency', ' ')
+    up_freq_row = row_getter(UP, 'frequency')
+    up_freqs = field_getter(UP, 'frequency', ' ')
 
-    upstream_service_id_row = row_getter(UPSTREAM, 'service id')
-    upstream_service_ids = field_getter(UPSTREAM, 'service id')
+    up_service_id_row = row_getter(UP, 'service id')
+    up_service_ids = field_getter(UP, 'service id')
 
-    upstream_rate_row = row_getter(UPSTREAM, 'symbol rate')
-    upstream_rates = field_getter(UPSTREAM, 'symbol rate', ' ', Decimal)
+    up_rate_row = row_getter(UP, 'symbol rate')
+    up_rates = field_getter(UP, 'symbol rate', ' ', Decimal)
 
-    upstream_power_row = row_getter(UPSTREAM, 'power level')
-    upstream_powers = field_getter(UPSTREAM, 'power level', ' ')
+    up_power_row = row_getter(UP, 'power level')
+    up_powers = field_getter(UP, 'power level', ' ')
 
-    upstream_status_row = row_getter(UPSTREAM, 'ranging status')
-    upstream_statuses = field_getter(UPSTREAM, 'ranging status', None, str)
+    up_status_row = row_getter(UP, 'ranging status')
+    up_statuses = field_getter(UP, 'ranging status', None, str)
 
 
 def load_data(source, parser=None):
@@ -139,8 +139,8 @@ def main():
     data = SignalData(html)
 
     info = (
-        ('downstream', ('channels', 'freqs', 'snrs', 'powers')),
-        ('upstream',
+        ('down', ('channels', 'freqs', 'snrs', 'powers')),
+        ('up',
             ('channels', 'service_ids', 'rates', 'powers', 'statuses')),
     )
 
