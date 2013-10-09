@@ -126,6 +126,9 @@ class SignalData(object):
     upstream_power_row = row_getter(UPSTREAM, 'power level')
     upstream_powers = field_getter(UPSTREAM, 'power level', ' ')
 
+    upstream_status_row = row_getter(UPSTREAM, 'ranging status')
+    upstream_statuses = field_getter(UPSTREAM, 'ranging status', None, str)
+
 
 def load_data(source, parser=None):
     with open(source) as content:
