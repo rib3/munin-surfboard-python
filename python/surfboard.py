@@ -137,6 +137,25 @@ class SignalData(object):
     up_status_row = row_getter(UP, UP_STATUS)
     up_statuses = field_getter(UP, UP_STATUS, None, str)
 
+    STATS = 'signal stats (codewords)'
+    stats_table = table_getter(STATS)
+
+    STATS_CHANNEL = 'channel id'
+    stats_channel_row = row_getter(STATS, STATS_CHANNEL)
+    stats_channels = field_getter(STATS, STATS_CHANNEL)
+
+    STATS_UNERRORED = 'total unerrored'
+    stats_unerrored_row = row_getter(STATS, STATS_UNERRORED)
+    stats_unerroreds = field_getter(STATS, STATS_UNERRORED)
+
+    STATS_CORRECTABLE = 'total correctable'
+    stats_correctable_row = row_getter(STATS, STATS_CORRECTABLE)
+    stats_correctables = field_getter(STATS, STATS_CORRECTABLE)
+
+    STATS_UNCORRECTABLE = 'total uncorrectable'
+    stats_uncorrectable_row = row_getter(STATS, STATS_UNCORRECTABLE)
+    stats_uncorrectables = field_getter(STATS, STATS_UNCORRECTABLE)
+
 
 def load_data(source, parser=None):
     with open(source) as content:
