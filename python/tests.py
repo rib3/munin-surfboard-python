@@ -12,10 +12,10 @@ class SignalDataTestCase(TestCase):
     #source_file = 'cmSignalData.htm.1'
     source_file = 'working.htm'
 
-    channels = [144, 141, 142, 143]
-    freqs = [699000000, 681000000, 687000000, 693000000]
-    snrs = [34, 35, 35, 34]
-    powers = [-11, -9, -9, -10]
+    down_channels = [144, 141, 142, 143]
+    down_freqs = [699000000, 681000000, 687000000, 693000000]
+    down_snrs = [34, 35, 35, 34]
+    down_powers = [-11, -9, -9, -10]
 
     @classmethod
     def setUpClass(cls):
@@ -50,7 +50,7 @@ class SignalDataTestCase(TestCase):
     def test_down_channels(self):
         channels = self.signal_data.down_channels()
         self.assertIsNotNone(channels)
-        self.assertEquals(self.channels, channels)
+        self.assertEquals(self.down_channels, channels)
 
     def test_down_freq_row(self):
         row = self.signal_data.down_freq_row()
@@ -61,7 +61,7 @@ class SignalDataTestCase(TestCase):
     def test_down_freqs(self):
         freqs = self.signal_data.down_freqs()
         self.assertIsNotNone(freqs)
-        self.assertEquals(self.freqs, freqs)
+        self.assertEquals(self.down_freqs, freqs)
 
     def test_down_snr_row(self):
         row = self.signal_data.down_snr_row()
@@ -72,7 +72,7 @@ class SignalDataTestCase(TestCase):
     def test_down_snrs(self):
         snrs = self.signal_data.down_snrs()
         self.assertIsNotNone(snrs)
-        self.assertEquals(self.snrs, snrs)
+        self.assertEquals(self.down_snrs, snrs)
 
     def test_down_power_row(self):
         row = self.signal_data.down_power_row()
@@ -83,4 +83,4 @@ class SignalDataTestCase(TestCase):
     def test_down_powers(self):
         powers = self.signal_data.down_powers()
         self.assertIsNotNone(powers)
-        self.assertEquals(self.powers, powers)
+        self.assertEquals(self.down_powers, powers)
