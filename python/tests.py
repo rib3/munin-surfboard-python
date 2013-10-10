@@ -94,31 +94,22 @@ class SignalDataTestCase(TestCase):
     test_down_power_row = row_tester('down_power', 'Power Level')
     test_down_powers = val_tester('down_powers')
 
-    ## Up
-    test_up_table = table_tester('up', ['upstream', 'bonding channel'])
-
-    test_up_channel_row = row_tester('up_channel', 'Channel ID')
-    test_up_channels = val_tester('up_channels')
-
-    test_up_freq_row = row_tester('up_freq', 'Frequency')
-    test_up_freqs = val_tester('up_freqs')
-
-    test_up_service_id_row = row_tester(
-            'up_service_id', 'Ranging Service ID')
-    test_up_service_ids = val_tester('up_service_ids')
-
-    test_up_rate_row = row_tester('up_rate', 'Symbol Rate')
-    test_up_rates = val_tester('up_rates')
-
-    test_up_status_row = row_tester('up_status', 'Ranging Status')
-    test_up_statuses = val_tester('up_statuses')
-
     ## Stats
     tables = {
+        'up': {
+            'headers': ['upstream', 'bonding channel'],
+            'rows': [
+                ('channel', 'Channel ID'),
+                ('freq', 'Frequency'),
+                ('service_id', 'Ranging Service ID'),
+                ('rate', 'Symbol Rate'),
+                ('status', 'Ranging Status'),
+            ],
+        },
         'stats': {
             'headers': ['signal stats (codewords)', 'bonding channel'],
             'rows': [
-                ('channel', 'Channel Id'),
+                ('channel', 'Channel ID'),
                 ('unerrored', 'Total Unerrored Codewords'),
                 ('correctable', 'Total Correctable Codewords'),
                 ('uncorrectable','Total Uncorrectable Codewords'),
