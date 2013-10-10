@@ -110,12 +110,14 @@ class SignalDataTestCase(TestCase):
     }
 
 for table, info in SignalDataTestCase.tables.items():
-    setattr(SignalDataTestCase, 'test_{}_table'.format(table),
+    cls = SignalDataTestCase
+    setattr(cls, 'test_{}_table'.format(table),
         table_tester(table, info.get('headers')))
+
     for name, header in info.get('rows', []):
         full_name = '_'.join((table, name))
         full_plural = pluralize(full_name)
-        setattr(SignalDataTestCase, 'test_{}_row'.format(full_name),
+        setattr(cls, 'test_{}_row'.format(full_name),
             row_tester(full_name, header))
-        setattr(SignalDataTestCase, 'test_{}'.format(full_plural),
+        setattr(cls, 'test_{}'.format(full_plural),
             val_tester(full_plural))
