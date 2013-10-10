@@ -8,6 +8,17 @@ __all__ = ('SignalDataTestCase', )
 def ts_lower(elem):
     return ET.tostring(elem).lower()
 
+def table_tester(name, headers=None):
+    def func(self):
+        table = getattr(self.signal_data, '{}_table'.format(name))()
+        self.assertIsNotNone(table)
+        self.assertEqual('table', table.tag)
+        header_text = ts_lower(table.xpath('./tbody/tr')[0])
+        if headers:
+            for header in headers:
+                self.assertTrue(header in header_text)
+    return func
+
 def row_tester(name, header):
     def func(self):
         row = getattr(self.signal_data, '{}_row'.format(name))()
@@ -60,14 +71,9 @@ class SignalDataTestCase(TestCase):
     def test_signal_data(self):
         self.assertIsNotNone(self.signal_data)
 
-    def test_down_table(self):
-        table = self.signal_data.down_table()
-        self.assertIsNotNone(table)
-        self.assertEqual('table', table.tag)
-        test_text = ts_lower(table.xpath('./tbody/tr')[0])
-        #\nDownstream \nBonding Channel Value
-        self.assertTrue('downstream' in test_text)
-        self.assertTrue('bonding channel' in test_text)
+    ## Down
+    test_down_table = table_tester('down',
+            ['downstream', 'bonding channel'])
 
     test_down_channel_row = row_tester('down_channel', 'Channel Id')
     test_down_channels = val_tester('down_channels')
@@ -80,6 +86,9 @@ class SignalDataTestCase(TestCase):
 
     test_down_power_row = row_tester('down_power', 'Power Level')
     test_down_powers = val_tester('down_powers')
+
+    ## Up
+    test_up_table = table_tester('up', ['upstream', 'bonding channel'])
 
     test_up_channel_row = row_tester('up_channel', 'Channel ID')
     test_up_channels = val_tester('up_channels')
@@ -97,17 +106,9 @@ class SignalDataTestCase(TestCase):
     test_up_status_row = row_tester('up_status', 'Ranging Status')
     test_up_statuses = val_tester('up_statuses')
 
-    #########
-    # STATS #
-    #########
-    def test_stats_table(self):
-        table = self.signal_data.stats_table()
-        self.assertIsNotNone(table)
-        self.assertEqual('table', table.tag)
-        test_text = ts_lower(table.xpath('./tbody/tr')[0])
-        # check for table (header) text
-        self.assertTrue('signal stats (codewords)' in test_text)
-        self.assertTrue('bonding channel' in test_text)
+    ## Stats
+    test_stats_table = table_tester('stats',
+        ['signal stats (codewords)', 'bonding channel'])
 
     test_stats_channel_row = row_tester('stats_channel', 'Channel ID')
     test_stats_channels = val_tester('stats_channels')
