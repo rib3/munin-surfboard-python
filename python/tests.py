@@ -144,9 +144,6 @@ class SignalDataTestCase(TestCase):
     test_stats_channel_row = row_tester('stats_channel', 'Channel ID')
     test_stats_channels = val_tester('stats_channels')
 
-    stats_correctable = [27, 47, 13, 10]
-    stats_uncorrectable = [1354, 664, 698, 701]
-
     test_stats_unerrored_row = row_tester(
             'stats_unerrored', 'Total Unerrored Codewords')
     test_stats_unerroreds = val_tester('stats_unerroreds')
