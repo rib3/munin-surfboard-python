@@ -14,9 +14,8 @@ def table_tester(name, headers=None):
         self.assertIsNotNone(table)
         self.assertEqual('table', table.tag)
         header_text = ts_lower(table.xpath('./tbody/tr')[0])
-        if headers:
-            for header in headers:
-                self.assertTrue(header in header_text)
+        for header in headers or []:
+            self.assertTrue(header in header_text)
     return func
 
 def row_tester(name, header):
