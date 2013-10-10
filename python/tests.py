@@ -5,6 +5,14 @@ from xml.etree import ElementTree as ET
 
 __all__ = ('SignalDataTestCase', )
 
+def pluralize(word):
+    """HORRIBLE WAY TO PLURALIZE A WORD!!!"""
+    if word.endswith('s'):
+        suffix = 'es'
+    else:
+        suffix = 's'
+    return ''.join((word, suffix))
+
 def ts_lower(elem):
     return ET.tostring(elem).lower()
 
@@ -115,15 +123,16 @@ class SignalDataTestCase(TestCase):
                 ('correctable', 'Total Correctable Codewords'),
                 ('uncorrectable','Total Uncorrectable Codewords'),
             ],
-        }
+        },
     }
 
 for table, info in SignalDataTestCase.tables.items():
     setattr(SignalDataTestCase, 'test_{}_table'.format(table),
         table_tester(table, info.get('headers')))
-    for row, header in info.get('rows', []):
-        name = '_'.join((table, row))
-        setattr(SignalDataTestCase, 'test_{}_row'.format(name),
-            row_tester(name, header))
-        setattr(SignalDataTestCase, 'test_{}s'.format(name),
-            val_tester(name +'s'))
+    for name, header in info.get('rows', []):
+        full_name = '_'.join((table, name))
+        full_plural = pluralize(full_name)
+        setattr(SignalDataTestCase, 'test_{}_row'.format(full_name),
+            row_tester(full_name, header))
+        setattr(SignalDataTestCase, 'test_{}'.format(full_plural),
+            val_tester(full_plural))
