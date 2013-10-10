@@ -1,0 +1,24 @@
+#3 is locked? (service id = 0, Ranging Status = Success)
+#4 is in progress? (service id = 49, Ranging Status = Continue)
+#5 is in progress? (only 1 downstream, service id = 2, Ranging = Continue)
+#6 is partial lock? (only 1 downstream, service id = 49, Ranging = Succcess (other two are ERR/Other)
+#7 is locked? (4 downstream, service id = 0, Ranging = Succcess)
+
+#8 is 2 solid, 1 blinking (original comment)
+#8 is in progress? (only 1 downstream, service id = n/a, Ranging = continue)
+
+#9 is same state as #8, but unerrored, and correctable are higher
+#10 is EARLY progress? 1 downstream (low Power Level), no upstream, no stats
+#11 is same as 8? 1 downstream, service id = n/a, Ranging = continue)
+#12 is CRAZY early? PARTIAL downstream, no upstream, some stats
+#13 is partial lock? (ONLY ONE down, service id = 0, ranging = success)
+#14 is locked? (4 down, service id = 0, ranging = success)
+#15 is CRAZY locked? (4 down, service id = 49, ranging = TRIPLE!! success)
+#16 is like #15, but slight power tweaks, and way higher stat counts
+
+#17 waiting on last light (original comment)
+#17 looks locked? Everything seems legit, power/snr is pretty high?
+
+#18 looks EARLY, PARTIAL downstream (no channel id), no upstream, partial stats
+#19 looks partial. ONE downstream, service id = n/a, ranging = continue
+#20 looks locked, power seems HIGH, "other" ranging is "T4 Time Out"
