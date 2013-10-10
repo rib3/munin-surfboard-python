@@ -106,20 +106,24 @@ class SignalDataTestCase(TestCase):
     test_up_statuses = val_tester('up_statuses')
 
     ## Stats
-    test_stats_table = table_tester('stats',
-        ['signal stats (codewords)', 'bonding channel'])
+    tables = {
+        'stats': {
+            'headers': ['signal stats (codewords)', 'bonding channel'],
+            'rows': [
+                ('channel', 'Channel Id'),
+                ('unerrored', 'Total Unerrored Codewords'),
+                ('correctable', 'Total Correctable Codewords'),
+                ('uncorrectable','Total Uncorrectable Codewords'),
+            ],
+        }
+    }
 
-    test_stats_channel_row = row_tester('stats_channel', 'Channel ID')
-    test_stats_channels = val_tester('stats_channels')
-
-    test_stats_unerrored_row = row_tester(
-            'stats_unerrored', 'Total Unerrored Codewords')
-    test_stats_unerroreds = val_tester('stats_unerroreds')
-
-    test_stats_correctable_row = row_tester(
-            'stats_correctable', 'Total Correctable Codewords')
-    test_stats_correctables = val_tester('stats_correctables')
-
-    test_stats_uncorrectable_row = row_tester(
-            'stats_uncorrectable', 'Total Uncorrectable Codewords')
-    test_stats_uncorrectables = val_tester('stats_uncorrectables')
+for table, info in SignalDataTestCase.tables.items():
+    setattr(SignalDataTestCase, 'test_{}_table'.format(table),
+        table_tester(table, info.get('headers')))
+    for row, header in info.get('rows', []):
+        name = '_'.join((table, row))
+        setattr(SignalDataTestCase, 'test_{}_row'.format(name),
+            row_tester(name, header))
+        setattr(SignalDataTestCase, 'test_{}s'.format(name),
+            val_tester(name +'s'))
