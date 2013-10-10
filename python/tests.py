@@ -69,49 +69,17 @@ class SignalDataTestCase(TestCase):
         self.assertTrue('downstream' in test_text)
         self.assertTrue('bonding channel' in test_text)
 
-    def test_down_channel_row(self):
-        row = self.signal_data.down_channel_row()
-        self.assertIsNotNone(row)
-        self.assertEqual('Channel ID'.lower(),
-                         strip_lower(row.find('td').text))
+    test_down_channel_row = row_tester('down_channel', 'Channel Id')
+    test_down_channels = val_tester('down_channels')
 
-    def test_down_channels(self):
-        channels = self.signal_data.down_channels()
-        self.assertIsNotNone(channels)
-        self.assertEquals(self.down_channels, channels)
+    test_down_freq_row = row_tester('down_freq', 'Frequency')
+    test_down_freqs = val_tester('down_freqs')
 
-    def test_down_freq_row(self):
-        row = self.signal_data.down_freq_row()
-        self.assertIsNotNone(row)
-        self.assertEqual('Frequency'.lower(),
-                         strip_lower(row.find('td').text))
+    test_down_snr_row = row_tester('down_snr', 'Signal to Noise Ratio')
+    test_down_snrs = val_tester('down_snrs')
 
-    def test_down_freqs(self):
-        freqs = self.signal_data.down_freqs()
-        self.assertIsNotNone(freqs)
-        self.assertEquals(self.down_freqs, freqs)
-
-    def test_down_snr_row(self):
-        row = self.signal_data.down_snr_row()
-        self.assertIsNotNone(row)
-        self.assertEqual(strip_lower('Signal to Noise Ratio'),
-                         strip_lower(row.find('td').text))
-
-    def test_down_snrs(self):
-        snrs = self.signal_data.down_snrs()
-        self.assertIsNotNone(snrs)
-        self.assertEquals(self.down_snrs, snrs)
-
-    def test_down_power_row(self):
-        row = self.signal_data.down_power_row()
-        self.assertIsNotNone(row)
-        self.assertEqual('Power Level'.lower(),
-                         strip_lower(row.find('td').text))
-
-    def test_down_powers(self):
-        powers = self.signal_data.down_powers()
-        self.assertIsNotNone(powers)
-        self.assertEquals(self.down_powers, powers)
+    test_down_power_row = row_tester('down_power', 'Power Level')
+    test_down_powers = val_tester('down_powers')
 
     test_up_channel_row = row_tester('up_channel', 'Channel ID')
     test_up_channels = val_tester('up_channels')
