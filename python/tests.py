@@ -78,24 +78,16 @@ class SignalDataTestCase(TestCase):
     def test_signal_data(self):
         self.assertIsNotNone(self.signal_data)
 
-    ## Down
-    test_down_table = table_tester('down',
-            ['downstream', 'bonding channel'])
-
-    test_down_channel_row = row_tester('down_channel', 'Channel Id')
-    test_down_channels = val_tester('down_channels')
-
-    test_down_freq_row = row_tester('down_freq', 'Frequency')
-    test_down_freqs = val_tester('down_freqs')
-
-    test_down_snr_row = row_tester('down_snr', 'Signal to Noise Ratio')
-    test_down_snrs = val_tester('down_snrs')
-
-    test_down_power_row = row_tester('down_power', 'Power Level')
-    test_down_powers = val_tester('down_powers')
-
-    ## Stats
     tables = {
+        'down': {
+            'headers': ['downstream', 'bonding channel'],
+            'rows': [
+                ('channel', 'Channel ID'),
+                ('freq', 'Frequency'),
+                ('snr', 'Signal to Noise Ratio'),
+                ('power', 'Power Level'),
+            ],
+        },
         'up': {
             'headers': ['upstream', 'bonding channel'],
             'rows': [
