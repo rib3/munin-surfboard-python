@@ -177,7 +177,7 @@ def main():
     for section, subs in info:
         print "{}:".format(section)
         for sub in subs:
-            method = '{}_{}'.format(section, sub)
+            method = '_'.join((section, sub))
             vals = getattr(data, method)()
             print "\t{}: {}".format(sub, map(str, vals))
 
