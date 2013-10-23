@@ -25,7 +25,10 @@ def convert_text(elems, func, split=None):
             num = strip_lower(num)
             if split is not None:
                 num = num.split(split, 1)[0]
-            num = func(num)
+            try:
+                num = func(num)
+            except:
+                num = None
         nums.append(num)
     return nums
 
