@@ -124,3 +124,13 @@ for table, info in SignalDataTestCase.tables.items():
             val_tester(full_plural))
     # Delete, or var will be found in module and added to testcases
     del cls
+
+
+class SignalDataTestCaseTwo(SignalDataTestCase):
+    source_file = 'working-2.htm'
+
+    up_service_ids = [49, 49, 49]
+    up_statuses = ['continue', 'aborted', 'aborted']
+    stats_unerroreds = [828766, 828769, 828771, 828773]
+    stats_correctables = [17, 16, 21, 15]
+    stats_uncorrectables = [641, 642, 637, 643]
