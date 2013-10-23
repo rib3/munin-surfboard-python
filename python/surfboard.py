@@ -165,6 +165,9 @@ def load_data(source, parser=None):
         return BeautifulSoup(content.read(), parser)
 
 def main():
+    if len(sys.argv) < 2:
+        return
+
     html = sys.argv[1]
     data = SignalData(html)
 
