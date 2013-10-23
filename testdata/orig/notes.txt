@@ -1,3 +1,5 @@
+#1 is in progress (only 1 downstream, upstream EMPTY)
+#2 is in progress? (1 downstream, service = "n/a", ranging = success)
 #3 is locked? (service id = 0, Ranging Status = Success)
 #4 is in progress? (service id = 49, Ranging Status = Continue)
 #5 is in progress? (only 1 downstream, service id = 2, Ranging = Continue)
