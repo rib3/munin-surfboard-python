@@ -3,7 +3,10 @@ from unittest import TestCase
 from surfboard import SignalData, strip_lower
 from xml.etree import ElementTree as ET
 
-__all__ = ('SignalDataTestCase', )
+__all__ = (
+    'SignalDataTestCase', 'SignalDataTestCaseTwo',
+    'SDOneDownOnlyTestCase',
+)
 
 def pluralize(word):
     """HORRIBLE WAY TO PLURALIZE A WORD!!!"""
@@ -134,3 +137,25 @@ class SignalDataTestCaseTwo(SignalDataTestCase):
     stats_unerroreds = [828766, 828769, 828771, 828773]
     stats_correctables = [17, 16, 21, 15]
     stats_uncorrectables = [641, 642, 637, 643]
+
+
+class SDOneDownOnlyTestCase(SignalDataTestCase):
+    source_dir = ('..', 'testdata', )
+    source_file = 'one_down_only.htm'
+
+    down_channels = [144]
+    down_freqs = [699000000]
+    down_snrs = [34]
+    down_powers = [-11]
+
+    up_channels = []
+    up_freqs = []
+    up_service_ids = []
+    up_rates = []
+    up_powers = []
+    up_statuses = []
+
+    stats_channels = [144]
+    stats_unerroreds = [183209]
+    stats_correctables = [11]
+    stats_uncorrectables = [658]
