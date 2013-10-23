@@ -95,6 +95,7 @@ class SignalDataTestCase(TestCase):
                 ('freq', 'Frequency'),
                 ('service_id', 'Ranging Service ID'),
                 ('rate', 'Symbol Rate'),
+                ('power', 'Power Level'),
                 ('status', 'Ranging Status'),
             ],
         },
