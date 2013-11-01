@@ -44,6 +44,20 @@ def val_tester(name):
         self.assertEquals(getattr(self, name), vals)
     return func
 
+def column_tester(section):
+    def func(self):
+        column_method = '{}_by_column'.format(section)
+        columns = getattr(self.signal_data, column_method)()
+        self.assertIsNotNone(columns)
+        for i, column in enumerate(columns):
+            for key, val in column.items():
+                val_name = '_'.join((section, key))
+                val_name = pluralize(val_name)
+                vals = getattr(self, val_name)
+                #print 'val, val[{}]'.format(i), val, vals[i]
+                self.assertEquals(vals[i], val)
+    return func
+
 class SignalDataTestCase(TestCase):
     source_dir = ('..', 'testdata', )
     #source_file = 'cmSignalData.htm.1'
@@ -125,6 +139,10 @@ for table, info in SignalDataTestCase.tables.items():
             row_tester(full_name, header))
         setattr(cls, 'test_{}'.format(full_plural),
             val_tester(full_plural))
+
+    if table == 'down':
+        setattr(cls, 'test_{}_columns'.format(table),
+            column_tester(table))
 
 # Delete, or var will be found in module and added to testcases
 del cls
