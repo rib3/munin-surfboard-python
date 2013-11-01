@@ -44,7 +44,7 @@ def val_tester(name):
         self.assertEquals(getattr(self, name), vals)
     return func
 
-def column_tester(table):
+def column_tester(table, fields):
     def func(self):
         column_method = '{}_by_column'.format(table)
         columns = getattr(self.signal_data, column_method)()
@@ -56,7 +56,18 @@ def column_tester(table):
                 val_name = pluralize(val_name)
                 vals = getattr(self, val_name)
                 #print 'val, val[{}]'.format(i), val, vals[i]
-                self.assertEquals(vals[i], val)
+                #self.assertEquals(vals[i], val)
+
+        columns = []
+        for field in fields:
+            method = '_'.join((table, field)) +'s'
+            columns.append(getattr(self, method))
+
+        columns = zip(*columns)
+        columns = map(lambda c: dict(zip(fields, c)), columns)
+        self.assertEquals(columns,
+            getattr(self.signal_data, column_method)())
+
     return func
 
 class SignalDataTestCase(TestCase):
@@ -133,7 +144,8 @@ for table, info in SignalDataTestCase.tables.items():
     setattr(cls, 'test_{}_table'.format(table),
         table_tester(table, info.get('headers')))
 
-    for name, header in info.get('rows', []):
+    rows = info.get('rows', [])
+    for name, header in rows:
         full_name = '_'.join((table, name))
         full_plural = pluralize(full_name)
         setattr(cls, 'test_{}_row'.format(full_name),
@@ -141,9 +153,10 @@ for table, info in SignalDataTestCase.tables.items():
         setattr(cls, 'test_{}'.format(full_plural),
             val_tester(full_plural))
 
+    fields = [name for name, _ in rows]
     if table == 'down':
         setattr(cls, 'test_{}_columns'.format(table),
-            column_tester(table))
+            column_tester(table, fields))
 
 # Delete, or var will be found in module and added to testcases
 del cls
