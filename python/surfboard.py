@@ -12,6 +12,14 @@ parser = argparse.ArgumentParser()
 parser.add_argument('mode', nargs='?')
 parser.add_argument('html')
 
+def pluralize(word):
+    """HORRIBLE WAY TO PLURALIZE A WORD!!!"""
+    if word.endswith('s'):
+        suffix = 'es'
+    else:
+        suffix = 's'
+    return ''.join((word, suffix))
+
 def strip_lower(text):
     """strip() and lower() text."""
     if text is not None:

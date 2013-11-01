@@ -1,20 +1,12 @@
 from decimal import Decimal
 from unittest import TestCase
-from surfboard import SignalData, strip_lower, zip_and_dict
+from surfboard import pluralize, SignalData, strip_lower, zip_and_dict
 from xml.etree import ElementTree as ET
 
 __all__ = (
     'SignalDataTestCase', 'SignalDataTestCaseTwo',
     'SDOneDownOnlyTestCase',
 )
-
-def pluralize(word):
-    """HORRIBLE WAY TO PLURALIZE A WORD!!!"""
-    if word.endswith('s'):
-        suffix = 'es'
-    else:
-        suffix = 's'
-    return ''.join((word, suffix))
 
 def ts_lower(elem):
     return ET.tostring(elem).lower()
