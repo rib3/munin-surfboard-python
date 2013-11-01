@@ -40,7 +40,8 @@ def column_tester(table, fields):
     def func(self):
         columns = []
         for field in fields:
-            method = '_'.join((table, field)) +'s'
+            method = '_'.join((table, field))
+            method = pluralize(method)
             columns.append(getattr(self, method))
         columns = zip_and_dict(columns, fields)
 
