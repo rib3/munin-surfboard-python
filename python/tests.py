@@ -135,9 +135,8 @@ for table, info in SignalDataTestCase.tables.items():
             val_tester(full_plural))
 
     fields = [name for name, _ in rows]
-    if table == 'down':
-        setattr(cls, 'test_{}_columns'.format(table),
-            column_tester(table, fields))
+    setattr(cls, 'test_{}_columns'.format(table),
+        column_tester(table, fields))
 
 # Delete, or var will be found in module and added to testcases
 del cls

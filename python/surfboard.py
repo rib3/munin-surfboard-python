@@ -203,6 +203,9 @@ class SignalData(object):
     stats_uncorrectable_row = row_getter(STATS, STATS_UNCORRECTABLE)
     stats_uncorrectables = field_getter(STATS, STATS_UNCORRECTABLE)
 
+    stats_by_column = column_getter('stats',
+            ('channel', 'unerrored', 'correctable', 'uncorrectable'))
+
 
 def load_data(source, parser=None):
     with open(source) as content:
