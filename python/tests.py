@@ -113,8 +113,8 @@ class SignalDataTestCase(TestCase):
         },
     }
 
+cls = SignalDataTestCase
 for table, info in SignalDataTestCase.tables.items():
-    cls = SignalDataTestCase
     setattr(cls, 'test_{}_table'.format(table),
         table_tester(table, info.get('headers')))
 
@@ -125,8 +125,9 @@ for table, info in SignalDataTestCase.tables.items():
             row_tester(full_name, header))
         setattr(cls, 'test_{}'.format(full_plural),
             val_tester(full_plural))
-    # Delete, or var will be found in module and added to testcases
-    del cls
+
+# Delete, or var will be found in module and added to testcases
+del cls
 
 
 class SignalDataTestCaseTwo(SignalDataTestCase):
