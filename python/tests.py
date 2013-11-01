@@ -140,7 +140,8 @@ for table, info in SignalDataTestCase.tables.items():
 
 # Delete, or var will be found in module and added to testcases
 del cls
-
+# Delete misc vars from namespace
+del table, info, rows, name, header, fields
 
 class SignalDataTestCaseTwo(SignalDataTestCase):
     source_file = 'working-2.htm'
