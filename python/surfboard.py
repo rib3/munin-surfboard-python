@@ -5,6 +5,7 @@ from decimal import Decimal
 from functools import partial
 from xml.etree import ElementTree as ET
 from lxml import html as lxhtml
+from pprint import pprint, pformat
 import argparse
 import sys
 
@@ -225,7 +226,11 @@ def test(data):
             method = '_'.join((section, sub))
             vals = getattr(data, method)()
             print "\t{}: {}".format(sub, map(str, vals))
-    print "down_by: {}".format(data.down_by_column())
+    pprint({
+        'down': data.down_by_column(),
+        'up': data.up_by_column(),
+        'stats': data.stats_by_column(),
+    })
 
 def config(data):
     print "graph_title Moto Surfboard Signal/Power"
