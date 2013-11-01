@@ -44,14 +44,15 @@ def val_tester(name):
         self.assertEquals(getattr(self, name), vals)
     return func
 
-def column_tester(section):
+def column_tester(table):
     def func(self):
-        column_method = '{}_by_column'.format(section)
+        column_method = '{}_by_column'.format(table)
         columns = getattr(self.signal_data, column_method)()
         self.assertIsNotNone(columns)
+
         for i, column in enumerate(columns):
             for key, val in column.items():
-                val_name = '_'.join((section, key))
+                val_name = '_'.join((table, key))
                 val_name = pluralize(val_name)
                 vals = getattr(self, val_name)
                 #print 'val, val[{}]'.format(i), val, vals[i]
