@@ -181,6 +181,9 @@ class SignalData(object):
     up_status_row = row_getter(UP, UP_STATUS)
     up_statuses = field_getter(UP, UP_STATUS, None, str)
 
+    up_by_column = column_getter('up',
+            ('channel', 'freq', 'service_id', 'rate', 'power', 'status'))
+
     STATS = 'signal stats (codewords)'
     stats_table = table_getter(STATS)
 
