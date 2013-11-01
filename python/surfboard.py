@@ -14,7 +14,10 @@ parser.add_argument('mode', nargs='?')
 parser.add_argument('html')
 
 def pluralize(word):
-    """HORRIBLE WAY TO PLURALIZE A WORD!!!"""
+    """HORRIBLE WAY TO PLURALIZE A WORD!!!
+
+    Will modify (if needed) in future, otherwise it works ok for now.
+    """
     if word.endswith('s'):
         suffix = 'es'
     else:
