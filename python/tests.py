@@ -46,25 +46,14 @@ def val_tester(name):
 
 def column_tester(table, fields):
     def func(self):
-        column_method = '{}_by_column'.format(table)
-        columns = getattr(self.signal_data, column_method)()
-        self.assertIsNotNone(columns)
-
-        for i, column in enumerate(columns):
-            for key, val in column.items():
-                val_name = '_'.join((table, key))
-                val_name = pluralize(val_name)
-                vals = getattr(self, val_name)
-                #print 'val, val[{}]'.format(i), val, vals[i]
-                #self.assertEquals(vals[i], val)
-
         columns = []
         for field in fields:
             method = '_'.join((table, field)) +'s'
             columns.append(getattr(self, method))
-
         columns = zip(*columns)
         columns = map(lambda c: dict(zip(fields, c)), columns)
+
+        column_method = '{}_by_column'.format(table)
         self.assertEquals(columns,
             getattr(self.signal_data, column_method)())
 
