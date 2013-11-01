@@ -188,28 +188,34 @@ class SignalData(object):
     up_by_column = column_getter('up',
             ('channel', 'freq', 'service_id', 'rate', 'power', 'status'))
 
-    STATS = 'signal stats (codewords)'
-    stats_table = table_getter(STATS)
+    tables = {
+        'stats': {
+            'header': 'signal stats (codewords)',
+            'rows': [
+                ('channel', 'channel id'),
+                ('unerrored', 'total unerrored'),
+                ('correctable', 'total correctable'),
+                ('uncorrectable','total uncorrectable'),
+            ],
+        }
+    }
 
-    STATS_CHANNEL = 'channel id'
-    stats_channel_row = row_getter(STATS, STATS_CHANNEL)
-    stats_channels = field_getter(STATS, STATS_CHANNEL)
 
-    STATS_UNERRORED = 'total unerrored'
-    stats_unerrored_row = row_getter(STATS, STATS_UNERRORED)
-    stats_unerroreds = field_getter(STATS, STATS_UNERRORED)
+cls = SignalData
+for table, info in cls.tables.items():
+    table_header = info['header']
+    setattr(cls, '{}_table'.format(table), table_getter(table_header))
 
-    STATS_CORRECTABLE = 'total correctable'
-    stats_correctable_row = row_getter(STATS, STATS_CORRECTABLE)
-    stats_correctables = field_getter(STATS, STATS_CORRECTABLE)
+    rows = info.get('rows', [])
+    for name, row_header in rows:
+        args = table_header, row_header
+        full_name = '_'.join((table, name))
+        full_plural = pluralize(full_name)
+        setattr(cls, '{}_row'.format(full_name), row_getter(*args))
+        setattr(cls, full_plural, field_getter(*args))
 
-    STATS_UNCORRECTABLE = 'total uncorrectable'
-    stats_uncorrectable_row = row_getter(STATS, STATS_UNCORRECTABLE)
-    stats_uncorrectables = field_getter(STATS, STATS_UNCORRECTABLE)
-
-    stats_by_column = column_getter('stats',
-            ('channel', 'unerrored', 'correctable', 'uncorrectable'))
-
+    setattr(cls, '{}_by_column'.format(table),
+        column_getter(table, [r[0] for r in rows]))
 
 def load_data(source, parser=None):
     with open(source) as content:
