@@ -118,6 +118,17 @@ class SignalData(object):
     down_power_row = row_getter(DOWN, DOWN_POWER)
     down_powers = field_getter(DOWN, DOWN_POWER, ' ')
 
+    def down_by_column(self):
+        columns = []
+        for i, v in enumerate(self.down_snrs()):
+            columns.append({
+                'channel': self.down_channels()[i],
+                'freq': self.down_freqs()[i],
+                'snr': self.down_snrs()[i],
+                'power': self.down_powers()[i],
+            })
+        return columns
+
     UP = 'upstream'
     up_table = table_getter(UP)
 
@@ -183,6 +194,7 @@ def test(data):
             method = '_'.join((section, sub))
             vals = getattr(data, method)()
             print "\t{}: {}".format(sub, map(str, vals))
+    print "down_by: {}".format(data.down_by_column())
 
 def config(data):
     print "graph_title Moto Surfboard Signal/Power"
