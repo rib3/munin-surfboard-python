@@ -5,7 +5,12 @@ from decimal import Decimal
 from functools import partial
 from xml.etree import ElementTree as ET
 from lxml import html as lxhtml
+import argparse
 import sys
+
+parser = argparse.ArgumentParser()
+parser.add_argument('mode', nargs='?')
+parser.add_argument('html')
 
 def strip_lower(text):
     """strip() and lower() text."""
@@ -164,13 +169,8 @@ def load_data(source, parser=None):
     with open(source) as content:
         return BeautifulSoup(content.read(), parser)
 
-def main():
-    if len(sys.argv) < 2:
-        return
-
-    html = sys.argv[1]
-    data = SignalData(html)
-
+def test(data):
+    print "Test: {}".format(data)
     info = (
         ('down', ('channels', 'freqs', 'snrs', 'powers')),
         ('up',
@@ -184,5 +184,27 @@ def main():
             vals = getattr(data, method)()
             print "\t{}: {}".format(sub, map(str, vals))
 
+def config(data):
+    print "Config: {}".format(data)
+
+def main(data):
+    print "graph_title Moto Surfboard Signal"
+
 if __name__ == '__main__':
-    main()
+    args = parser.parse_args()
+    if args.html in ('test', 'config'):
+        # Need to shift...
+        mode = args.html
+        html = none
+    else:
+        mode = args.mode
+        html = args.html
+
+    data = SignalData(html)
+
+    if mode == 'test':
+        test(data)
+    elif mode == 'config':
+        config(data)
+    else:
+        main(data)
