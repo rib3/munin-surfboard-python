@@ -21,6 +21,20 @@ def strip_lower(text):
             return None
     return text
 
+def zip_and_dict(lists, keys):
+    """Helper to convert value lists to keyed dicts.
+
+    Sample: (should this just be a doc test??)
+      lists: [['red', 'blue'], [0, 1]]
+      keys: ['color', 'status']
+    Returns:
+      [{'color': 'red', 'status': 0],
+       {'color': 'blue', 'status': 1]]
+    """
+    lists = zip(*lists)
+    lists = map(lambda list: dict(zip(keys, list)), lists)
+    return lists
+
 def convert_text(elems, func, split=None):
     """Take a list of elements and return their .text value as ints."""
     nums = []
@@ -93,8 +107,7 @@ def column_getter(table, fields):
         for field in fields:
             method = '_'.join((table, field)) +'s'
             columns.append(getattr(self, method)())
-        columns = zip(*columns)
-        columns = map(lambda c: dict(zip(fields, c)), columns)
+        columns = zip_and_dict(columns, fields)
         return columns
     return func
 

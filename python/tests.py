@@ -1,6 +1,6 @@
 from decimal import Decimal
 from unittest import TestCase
-from surfboard import SignalData, strip_lower
+from surfboard import SignalData, strip_lower, zip_and_dict
 from xml.etree import ElementTree as ET
 
 __all__ = (
@@ -50,8 +50,7 @@ def column_tester(table, fields):
         for field in fields:
             method = '_'.join((table, field)) +'s'
             columns.append(getattr(self, method))
-        columns = zip(*columns)
-        columns = map(lambda c: dict(zip(fields, c)), columns)
+        columns = zip_and_dict(columns, fields)
 
         column_method = '{}_by_column'.format(table)
         self.assertEquals(columns,
