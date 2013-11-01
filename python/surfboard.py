@@ -185,10 +185,28 @@ def test(data):
             print "\t{}: {}".format(sub, map(str, vals))
 
 def config(data):
-    print "Config: {}".format(data)
+    print "graph_title Moto Surfboard Signal/Power"
+    print "graph_order down_snr up_power"
+    print "graph_vlabel dB / dBmV"
+    #print "graph_category network"
+    for i, v in enumerate(data.down_snrs()):
+        id = i + 1
+        print "down_snr{}.label Downstream {} SnR".format(id, id)
+        #print "down_snr{}.value {}".format(id, v)
+        #print "down_freqs{}.value {}".format(id, v)
+    for i, v in enumerate(data.up_powers()):
+        id = i + 1
+        print "up_power{}.label Upstream {} Power".format(id, id)
+        #print "up_power{}.value {}".format(id, v)
 
 def main(data):
-    print "graph_title Moto Surfboard Signal"
+    for i, v in enumerate(data.down_snrs()):
+        id = i + 1
+        print "down_snr{}.value {}".format(id, v)
+        #print "down_freqs{}.value {}".format(id, v)
+    for i, v in enumerate(data.up_powers()):
+        id = i + 1
+        print "up_power{}.value {}".format(id, v)
 
 if __name__ == '__main__':
     args = parser.parse_args()
