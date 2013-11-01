@@ -87,6 +87,17 @@ def field_getter(table, header, split=None, convert=None):
         return get_fields(t, header, split, convert)
     return func
 
+def column_getter(table, fields):
+    def func(self):
+        columns = []
+        for field in fields:
+            method = '_'.join((table, field)) +'s'
+            columns.append(getattr(self, method)())
+        columns = zip(*columns)
+        columns = map(lambda c: dict(zip(fields, c)), columns)
+        return columns
+    return func
+
 class SignalData(object):
     def __init__(self, html):
         self.soup = load_data(html)
@@ -118,16 +129,8 @@ class SignalData(object):
     down_power_row = row_getter(DOWN, DOWN_POWER)
     down_powers = field_getter(DOWN, DOWN_POWER, ' ')
 
-    def down_by_column(self):
-        columns = []
-        for i, v in enumerate(self.down_snrs()):
-            columns.append({
-                'channel': self.down_channels()[i],
-                'freq': self.down_freqs()[i],
-                'snr': self.down_snrs()[i],
-                'power': self.down_powers()[i],
-            })
-        return columns
+    down_by_column = column_getter('down',
+            ('channel', 'freq', 'snr', 'power'))
 
     UP = 'upstream'
     up_table = table_getter(UP)
