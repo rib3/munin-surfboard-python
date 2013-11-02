@@ -238,8 +238,8 @@ def main(data):
         for i, info in enumerate(columns):
             id = i + 1
             for key in keys:
-                print "{}_{}{}.value {}".format(
-                        table, key, id, info.get(key))
+                source = "{}_{}{}".format(table, key, id)
+                print "{}.value {}".format(source, info.get(key))
 
 if __name__ == '__main__':
     args = parser.parse_args()
