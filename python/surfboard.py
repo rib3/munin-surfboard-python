@@ -136,29 +136,16 @@ class SignalData(object):
     def downstream_table(self):
         return self.center.table.tbody
 
-    DOWN = 'downstream'
-    down_table = table_getter(DOWN)
-
-    DOWN_CHANNEL = 'channel'
-    down_channel_row = row_getter(DOWN, DOWN_CHANNEL)
-    down_channels = field_getter(DOWN, DOWN_CHANNEL)
-
-    DOWN_FREQ = 'frequency'
-    down_freq_row = row_getter(DOWN, DOWN_FREQ)
-    down_freqs = field_getter(DOWN, DOWN_FREQ, ' ')
-
-    DOWN_SNR = 'signal to noise'
-    down_snr_row = row_getter(DOWN, DOWN_SNR)
-    down_snrs = field_getter(DOWN, DOWN_SNR, ' ')
-
-    DOWN_POWER = 'power level'
-    down_power_row = row_getter(DOWN, DOWN_POWER)
-    down_powers = field_getter(DOWN, DOWN_POWER, ' ')
-
-    down_by_column = column_getter('down',
-            ('channel', 'freq', 'snr', 'power'))
-
     tables = {
+        'down': {
+            'header': 'downstream',
+            'rows': [
+                ('channel', 'channel'),
+                ('freq', 'frequency', ' '),
+                ('snr', 'signal to noise', ' '),
+                ('power', 'power level', ' '),
+            ],
+        },
         'up': {
             'header': 'upstream',
             'rows': [
