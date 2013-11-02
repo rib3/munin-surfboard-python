@@ -130,6 +130,7 @@ class SignalData(object):
         #self.soup = load_data(html, "lxml")
         self.lxml = lxhtml.fromstring(str(self.soup).lower())
 
+    # This is used to setup class methods in setup_signal_data()
     tables = {
         'down': {
             'header': 'downstream',
@@ -159,7 +160,7 @@ class SignalData(object):
                 ('correctable', 'total correctable'),
                 ('uncorrectable','total uncorrectable'),
             ],
-        }
+        },
     }
 
 
