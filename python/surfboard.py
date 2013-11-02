@@ -177,8 +177,6 @@ for table, info in cls.tables.items():
     rows = info.get('rows', [])
     for row in rows:
         name, row_header, sep, convert = (row + (None, None))[:4]
-        if convert is not None:
-            print 'convert', convert
         full_name = '_'.join((table, name))
         full_plural = pluralize(full_name)
         row_name = '{}_row'.format(full_name)
