@@ -207,12 +207,17 @@ for table, info in cls.tables.items():
     setattr(cls, '{}_table'.format(table), table_getter(table_header))
 
     rows = info.get('rows', [])
-    for name, row_header in rows:
-        args = table_header, row_header
+    for row in rows:
+        name, row_header, sep, convert = (row + (None, None))[:4]
+        if convert is not None:
+            print 'convert', convert
         full_name = '_'.join((table, name))
         full_plural = pluralize(full_name)
-        setattr(cls, '{}_row'.format(full_name), row_getter(*args))
-        setattr(cls, full_plural, field_getter(*args))
+        row_name = '{}_row'.format(full_name)
+        setattr(cls, '{}_row'.format(full_name),
+                row_getter(table_header, row_header))
+        setattr(cls, full_plural,
+                field_getter(table_header, row_header, sep, convert))
 
     setattr(cls, '{}_by_column'.format(table),
         column_getter(table, [r[0] for r in rows]))
