@@ -212,6 +212,19 @@ def test(data):
         'stats': data.stats_by_column(),
     })
 
+graph = {
+    'down': {
+        'snr': {
+            'label': 'Downstream {id} SnR',
+        }
+    },
+    'up': {
+        'power': {
+            'label': 'Upstream {id} Power',
+        },
+    },
+}
+
 def config(data):
     print "graph_title Moto Surfboard Signal/Power"
     print "graph_order down_snr up_power"
@@ -233,19 +246,6 @@ def config(data):
                     fmt['source'] = "{table}_{point}{id}".format(**fmt)
                     fmt['val'] = val.format(**fmt)
                     print "{source}.{field} {val}".format(**fmt)
-
-graph = {
-    'down': {
-        'snr': {
-            'label': 'Downstream {id} SnR',
-        }
-    },
-    'up': {
-        'power': {
-            'label': 'Upstream {id} Power',
-        },
-    },
-}
 
 def main(data):
     for table, keys in graph.items():
