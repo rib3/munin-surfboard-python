@@ -169,21 +169,29 @@ class SignalData(object):
     }
 
 
-cls = SignalData
-for table, info in cls.tables.items():
-    table_header = info['header']
-    setattr(cls, '{}_table'.format(table), table_getter(table_header))
+def setup_signal_data():
+    """
+    Setup SignalData methods by going through it's tables dict.
 
-    rows = info.get('rows', [])
-    for row in rows:
-        name, row_header, sep, convert = (row + (None, None))[:4]
-        args = table_header, row_header, sep, convert
-        full_name = '_'.join((table, name))
-        setattr(cls, '{}_row'.format(full_name), row_getter(*args[:2]))
-        setattr(cls, pluralize(full_name), field_getter(*args))
+    This is inside of a function to avoid cluttering module namespace.
+    """
+    cls = SignalData
+    for table, info in cls.tables.items():
+        table_header = info['header']
+        setattr(cls, '{}_table'.format(table), table_getter(table_header))
 
-    setattr(cls, '{}_by_column'.format(table),
-        column_getter(table, [r[0] for r in rows]))
+        rows = info.get('rows', [])
+        for row in rows:
+            name, row_header, sep, convert = (row + (None, None))[:4]
+            args = table_header, row_header, sep, convert
+            full_name = '_'.join((table, name))
+            setattr(cls, '{}_row'.format(full_name), row_getter(*args[:2]))
+            setattr(cls, pluralize(full_name), field_getter(*args))
+
+        setattr(cls, '{}_by_column'.format(table),
+            column_getter(table, [r[0] for r in rows]))
+
+setup_signal_data()
 
 def load_data(source, parser=None):
     with open(source) as content:
