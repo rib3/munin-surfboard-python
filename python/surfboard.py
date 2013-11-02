@@ -217,19 +217,34 @@ def config(data):
     print "graph_order down_snr up_power"
     print "graph_vlabel dB / dBmV"
     #print "graph_category network"
-    for i, v in enumerate(data.down_snrs()):
-        id = i + 1
-        print "down_snr{}.label Downstream {} SnR".format(id, id)
-        #print "down_snr{}.value {}".format(id, v)
-        #print "down_freqs{}.value {}".format(id, v)
-    for i, v in enumerate(data.up_powers()):
-        id = i + 1
-        print "up_power{}.label Upstream {} Power".format(id, id)
-        #print "up_power{}.value {}".format(id, v)
+
+    for table, table_points in graph.items():
+        columns = getattr(data, '{}_by_column'.format(table))()
+        for i, column in enumerate(columns):
+            id = i + 1
+            for point, p_info in table_points.items():
+                for field, val in p_info.items():
+                    fmt = {
+                        'table': table,
+                        'point': point,
+                        'id': id,
+                        'field': field,
+                    }
+                    fmt['source'] = "{table}_{point}{id}".format(**fmt)
+                    fmt['val'] = val.format(**fmt)
+                    print "{source}.{field} {val}".format(**fmt)
 
 graph = {
-    'down': ('snr', ),
-    'up': ('power', ),
+    'down': {
+        'snr': {
+            'label': 'Downstream {id} SnR',
+        }
+    },
+    'up': {
+        'power': {
+            'label': 'Upstream {id} Power',
+        },
+    },
 }
 
 def main(data):
