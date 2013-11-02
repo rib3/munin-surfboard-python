@@ -133,9 +133,6 @@ class SignalData(object):
     def center(self):
         return self.soup.body.center
 
-    def downstream_table(self):
-        return self.center.table.tbody
-
     tables = {
         'down': {
             'header': 'downstream',
