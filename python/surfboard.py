@@ -239,7 +239,10 @@ def main(data):
             id = i + 1
             for key in keys:
                 source = "{}_{}{}".format(table, key, id)
-                print "{}.value {}".format(source, info.get(key))
+                val = info.get(key)
+                if val is None:
+                    val = 'U' # Munin code for unavailable
+                print "{}.value {}".format(source, val)
 
 if __name__ == '__main__':
     args = parser.parse_args()
