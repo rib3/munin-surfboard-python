@@ -227,14 +227,19 @@ def config(data):
         print "up_power{}.label Upstream {} Power".format(id, id)
         #print "up_power{}.value {}".format(id, v)
 
+graph = {
+    'down': ('snr', ),
+    'up': ('power', ),
+}
+
 def main(data):
-    for i, v in enumerate(data.down_snrs()):
-        id = i + 1
-        print "down_snr{}.value {}".format(id, v)
-        #print "down_freqs{}.value {}".format(id, v)
-    for i, v in enumerate(data.up_powers()):
-        id = i + 1
-        print "up_power{}.value {}".format(id, v)
+    for table, keys in graph.items():
+        columns = getattr(data, '{}_by_column'.format(table))()
+        for i, info in enumerate(columns):
+            id = i + 1
+            for key in keys:
+                print "{}_{}{}.value {}".format(
+                        table, key, id, info.get(key))
 
 if __name__ == '__main__':
     args = parser.parse_args()
