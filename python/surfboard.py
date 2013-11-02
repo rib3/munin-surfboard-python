@@ -177,13 +177,10 @@ for table, info in cls.tables.items():
     rows = info.get('rows', [])
     for row in rows:
         name, row_header, sep, convert = (row + (None, None))[:4]
+        args = table_header, row_header, sep, convert
         full_name = '_'.join((table, name))
-        full_plural = pluralize(full_name)
-        row_name = '{}_row'.format(full_name)
-        setattr(cls, '{}_row'.format(full_name),
-                row_getter(table_header, row_header))
-        setattr(cls, full_plural,
-                field_getter(table_header, row_header, sep, convert))
+        setattr(cls, '{}_row'.format(full_name), row_getter(*args[:2]))
+        setattr(cls, pluralize(full_name), field_getter(*args))
 
     setattr(cls, '{}_by_column'.format(table),
         column_getter(table, [r[0] for r in rows]))
