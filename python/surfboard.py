@@ -193,19 +193,14 @@ def load_data(source, parser=None):
         return BeautifulSoup(content.read(), parser)
 
 def test(data):
-    print "Test: {}".format(data)
-    info = (
-        ('down', ('channels', 'freqs', 'snrs', 'powers')),
-        ('up',
-            ('channels', 'service_ids', 'rates', 'powers', 'statuses')),
-    )
-
-    for section, subs in info:
+    for section, subs in SignalData.tables.items():
         print "{}:".format(section)
-        for sub in subs:
-            method = '_'.join((section, sub))
+        rows = [row[0] for row in subs.get('rows', [])]
+        for sub in rows:
+            method = pluralize('_'.join((section, sub)))
             vals = getattr(data, method)()
             print "\t{}: {}".format(sub, map(str, vals))
+
     pprint({
         'down': data.down_by_column(),
         'up': data.up_by_column(),
