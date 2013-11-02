@@ -211,11 +211,13 @@ graph = {
     'down': {
         'snr': {
             'label': 'Downstream {id} SnR',
-        }
+            'vlabel': 'dB',
+        },
     },
     'up': {
         'power': {
             'label': 'Upstream {id} Power',
+            'vlabel': 'dBmV',
         },
     },
 }
