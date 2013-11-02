@@ -130,9 +130,6 @@ class SignalData(object):
         #self.soup = load_data(html, "lxml")
         self.lxml = lxhtml.fromstring(str(self.soup).lower())
 
-    def center(self):
-        return self.soup.body.center
-
     tables = {
         'down': {
             'header': 'downstream',
