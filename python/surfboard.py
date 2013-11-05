@@ -125,6 +125,10 @@ def column_getter(table, fields):
         return columns
     return func
 
+def load_data(source, parser=None):
+    with open(source) as content:
+        return BeautifulSoup(content.read(), parser)
+
 class SignalData(object):
     def __init__(self, html):
         self.soup = load_data(html)
@@ -188,10 +192,6 @@ def setup_signal_data():
             column_getter(table, [r[0] for r in rows]))
 
 setup_signal_data()
-
-def load_data(source, parser=None):
-    with open(source) as content:
-        return BeautifulSoup(content.read(), parser)
 
 def test(data):
     for section, subs in SignalData.tables.items():
