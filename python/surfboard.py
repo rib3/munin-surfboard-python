@@ -6,6 +6,7 @@ from functools import partial
 from xml.etree import ElementTree as ET
 from lxml import html as lxhtml
 from pprint import pprint, pformat
+from urllib import urlopen
 import argparse
 import sys
 
@@ -126,8 +127,11 @@ def column_getter(table, fields):
     return func
 
 def load_data(source, parser=None):
-    with open(source) as content:
-        return BeautifulSoup(content.read(), parser)
+    if hasattr(source, 'startswith') and source.startswith('http'):
+        content = urlopen(source)
+    else:
+        content = open(source)
+    return BeautifulSoup(content.read(), parser)
 
 class SignalData(object):
     def __init__(self, html):
