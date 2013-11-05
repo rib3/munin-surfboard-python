@@ -10,9 +10,11 @@ from urllib import urlopen
 import argparse
 import sys
 
+DEFAULT_URL = 'http://192.168.100.1/cmSignalData.htm'
+
 parser = argparse.ArgumentParser()
 parser.add_argument('mode', nargs='?')
-parser.add_argument('html')
+parser.add_argument('html', nargs='?')
 
 def pluralize(word):
     """HORRIBLE WAY TO PLURALIZE A WORD!!!
@@ -266,10 +268,13 @@ if __name__ == '__main__':
     if args.html in ('test', 'config'):
         # Need to shift...
         mode = args.html
-        html = none
+        html = None
     else:
         mode = args.mode
         html = args.html
+
+    if html is None:
+        html = DEFAULT_URL
 
     data = SignalData(html)
 
