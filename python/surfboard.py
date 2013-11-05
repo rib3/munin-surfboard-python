@@ -48,7 +48,7 @@ def zip_and_dict(lists, keys):
     return lists
 
 def convert_text(elems, func, split=None):
-    """Take a list of elements and return their .text value as ints."""
+    """Convert and return a list of element's .text value with func()."""
     nums = []
     for elem in elems:
         num = elem.text
@@ -64,6 +64,7 @@ def convert_text(elems, func, split=None):
     return nums
 
 def intify_text(elems, split=None):
+    """Wrapper for convert_text with int() as conversion function."""
     return convert_text(elems, int, split)
 
 def contains(text):
