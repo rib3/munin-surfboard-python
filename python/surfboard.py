@@ -236,6 +236,25 @@ graphs = [
     },
 ]
 
+class GraphPoint(object):
+    def __init__(self, table, point, id, extra):
+        self.table = table
+        self.point = point
+        self.id = id
+        self.extra = extra
+
+    @property
+    def source(self):
+        return "{table}_{point}{id}".format(**self.__dict__)
+
+    def config(self):
+        config = []
+        for field, val in self.extra:
+            val = val.format(**self.__dict__)
+            config.append("{}.{} {}".format(self.source, field, val))
+
+        return '\n'.join(config)
+
 def config_graph(graph):
     config = []
     for key in 'graph', 'title', 'order', 'vlabel', 'category':
@@ -249,19 +268,11 @@ def config_graph(graph):
         columns = getattr(data, '{}_by_column'.format(table))()
         for i, column in enumerate(columns):
             id = GRAPH_IDS[i]
-            fmt = {
-                'table': table,
-                'point': p_name,
-                'id': id,
-            }
-            fmt['source'] = "{table}_{point}{id}".format(**fmt)
-            order.append(fmt['source'])
-            for field, val in p_info.items():
-                fmt.update({
-                    'field': field,
-                })
-                fmt['val'] = val.format(**fmt)
-                p_config.append("{source}.{field} {val}".format(**fmt))
+            gp = GraphPoint(table, p_name, id, p_info.items())
+            # Add this line to unify main and config loop
+            # val=p_info.get(p_name)
+            order.append(gp.source)
+            p_config.append(gp.config())
 
     config.append(' '.join(order))
     config.extend(p_config)
