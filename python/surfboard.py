@@ -217,20 +217,23 @@ def test(data):
 # Used to label channels
 GRAPH_IDS = 'ABCD'
 
-graph = {
-    'down': {
-        'snr': {
-            'label': 'Downstream {id} SnR',
-            'vlabel': 'dB',
-        },
+graphs = [
+    {
+        'title': "graph_title Moto Surfboard Signal/Power",
+        'vlabel': 'dB (down) / dBmV (up)',
+        'graph_category': 'network',
+        'points': [
+            ('down.snr', {
+                'label': 'Downstream {id} SnR',
+                'vlabel': 'dB',
+            }),
+            ('up.power', {
+                'label': 'Upstream {id} Power',
+                'vlabel': 'dBmV',
+            }),
+        ],
     },
-    'up': {
-        'power': {
-            'label': 'Upstream {id} Power',
-            'vlabel': 'dBmV',
-        },
-    },
-}
+]
 
 def graph_order():
     """Code to handle graph_order"""
@@ -242,27 +245,33 @@ def graph_order():
             graph_order.append(''.join((order, id)))
     return ' '.join(graph_order)
 
-def config(data):
-    print "graph_title Moto Surfboard Signal/Power"
-    print "graph_order", graph_order()
-    print "graph_vlabel dB (down) / dBmV (up)"
-    print "graph_category network"
+def config_graph(graph):
+    for key in 'title', 'order', 'vlabel', 'category':
+        val = graph.get(key)
+        if val is not None:
+            print "graph_{} {}".format(key, val)
 
-    for table, table_points in graph.items():
+    # Do via code...
+    print "graph_order", graph_order()
+
+    for point, p_info in graph.get('points', []):
+        table, p_name = point.split('.')
         columns = getattr(data, '{}_by_column'.format(table))()
         for i, column in enumerate(columns):
             id = GRAPH_IDS[i]
-            for point, p_info in table_points.items():
-                for field, val in p_info.items():
-                    fmt = {
-                        'table': table,
-                        'point': point,
-                        'id': id,
-                        'field': field,
-                    }
-                    fmt['source'] = "{table}_{point}{id}".format(**fmt)
-                    fmt['val'] = val.format(**fmt)
-                    print "{source}.{field} {val}".format(**fmt)
+            for field, val in p_info.items():
+                fmt = {
+                    'table': table,
+                    'point': p_name,
+                    'id': id,
+                    'field': field,
+                }
+                fmt['source'] = "{table}_{point}{id}".format(**fmt)
+                fmt['val'] = val.format(**fmt)
+                print "{source}.{field} {val}".format(**fmt)
+
+def config(data):
+    map(config_graph, graphs)
 
 def main(data):
     for table, keys in graph.items():
