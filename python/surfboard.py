@@ -232,10 +232,19 @@ graph = {
     },
 }
 
+def graph_order():
+    """Code to handle graph_order"""
+    # Order by all possible data points (vs fancy code)
+    orders = 'down_snr', 'up_power'
+    graph_order = []
+    for order in orders:
+        for id in GRAPH_IDS:
+            graph_order.append(''.join((order, id)))
+    return ' '.join(graph_order)
+
 def config(data):
     print "graph_title Moto Surfboard Signal/Power"
-    # Order by all possible data points (vs fancy code)
-    print "graph_order down_snr1 down_snr2 down_snr3 down_snr4 up_power1 up_power2 up_power3"
+    print "graph_order", graph_order()
     print "graph_vlabel dB (down) / dBmV (up)"
     print "graph_category network"
 
