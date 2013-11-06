@@ -235,25 +235,13 @@ graphs = [
     },
 ]
 
-def graph_order():
-    """Code to handle graph_order"""
-    # Order by all possible data points (vs fancy code)
-    orders = 'down_snr', 'up_power'
-    graph_order = []
-    for order in orders:
-        for id in GRAPH_IDS:
-            graph_order.append(''.join((order, id)))
-    return ' '.join(graph_order)
-
 def config_graph(graph):
     for key in 'title', 'order', 'vlabel', 'category':
         val = graph.get(key)
         if val is not None:
             print "graph_{} {}".format(key, val)
 
-    # Do via code...
-    print "graph_order", graph_order()
-
+    config, order = [], []
     for point, p_info in graph.get('points', []):
         table, p_name = point.split('.')
         columns = getattr(data, '{}_by_column'.format(table))()
@@ -265,12 +253,16 @@ def config_graph(graph):
                 'id': id,
             }
             fmt['source'] = "{table}_{point}{id}".format(**fmt)
+            order.append(fmt['source'])
             for field, val in p_info.items():
                 fmt.update({
                     'field': field,
                 })
                 fmt['val'] = val.format(**fmt)
-                print "{source}.{field} {val}".format(**fmt)
+                config.append("{source}.{field} {val}".format(**fmt))
+
+    print "graph_order", ' '.join(order)
+    print '\n'.join(config)
 
 def config(data):
     map(config_graph, graphs)
