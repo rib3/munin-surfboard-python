@@ -276,24 +276,27 @@ def main(data):
                     val = 'U' # Munin code for unavailable
                 print "{}.value {}".format(source, val)
 
+def handle_args(args=None):
+    MODES = 'test', 'config'
+    args = parser.parse_args(args)
+
+    if not args.mode in MODES:
+        # Maybe it's html
+        args.html = args.mode
+        args.mode = None
+
+    if args.html is None:
+        args.html = DEFAULT_URL
+
+    return args
+
 if __name__ == '__main__':
-    args = parser.parse_args()
-    if args.html in ('test', 'config'):
-        # Need to shift...
-        mode = args.html
-        html = None
-    else:
-        mode = args.mode
-        html = args.html
+    args = handle_args()
+    data = SignalData(args.html)
 
-    if html is None:
-        html = DEFAULT_URL
-
-    data = SignalData(html)
-
-    if mode == 'test':
+    if args.mode == 'test':
         test(data)
-    elif mode == 'config':
+    elif args.mode == 'config':
         config(data)
     else:
         main(data)
