@@ -219,6 +219,7 @@ GRAPH_IDS = 'ABCD'
 
 graphs = [
     {
+        'graph': 'simple',
         'title': "graph_title Moto Surfboard Signal/Power",
         'vlabel': 'dB (down) / dBmV (up)',
         'graph_category': 'network',
@@ -237,7 +238,7 @@ graphs = [
 
 def config_graph(graph):
     config = []
-    for key in 'title', 'order', 'vlabel', 'category':
+    for key in 'graph', 'title', 'order', 'vlabel', 'category':
         val = graph.get(key)
         if val is not None:
             print "graph_{} {}".format(key, val)
