@@ -271,13 +271,14 @@ def config(data):
     print '\n'.join(map(config_graph, graphs))
 
 def main(data):
-    for table, keys in graph.items():
-        columns = getattr(data, '{}_by_column'.format(table))()
-        for i, info in enumerate(columns):
-            id = GRAPH_IDS[i]
-            for key in keys:
-                source = "{}_{}{}".format(table, key, id)
-                val = info.get(key)
+    for graph in graphs:
+        for point, p_info in graph.get('points', []):
+            table, p_name = point.split('.')
+            columns = getattr(data, '{}_by_column'.format(table))()
+            for i, info in enumerate(columns):
+                id = GRAPH_IDS[i]
+                source = "{}_{}{}".format(table, p_name, id)
+                val = info.get(p_name)
                 if val is None:
                     val = 'U' # Munin code for unavailable
                 print "{}.value {}".format(source, val)
