@@ -232,7 +232,7 @@ graph = {
 def config(data):
     print "graph_title Moto Surfboard Signal/Power"
     print "graph_order down_snr up_power"
-    print "graph_vlabel dB / dBmV"
+    print "graph_vlabel dB (down) / dBmV (up)"
     print "graph_category network"
 
     for table, table_points in graph.items():
