@@ -259,14 +259,16 @@ def config_graph(graph):
         columns = getattr(data, '{}_by_column'.format(table))()
         for i, column in enumerate(columns):
             id = GRAPH_IDS[i]
+            fmt = {
+                'table': table,
+                'point': p_name,
+                'id': id,
+            }
+            fmt['source'] = "{table}_{point}{id}".format(**fmt)
             for field, val in p_info.items():
-                fmt = {
-                    'table': table,
-                    'point': p_name,
-                    'id': id,
+                fmt.update({
                     'field': field,
-                }
-                fmt['source'] = "{table}_{point}{id}".format(**fmt)
+                })
                 fmt['val'] = val.format(**fmt)
                 print "{source}.{field} {val}".format(**fmt)
 
