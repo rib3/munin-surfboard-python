@@ -236,12 +236,13 @@ graphs = [
 ]
 
 def config_graph(graph):
+    config = []
     for key in 'title', 'order', 'vlabel', 'category':
         val = graph.get(key)
         if val is not None:
             print "graph_{} {}".format(key, val)
 
-    config, order = [], []
+    p_config, order = [], ['graph_order']
     for point, p_info in graph.get('points', []):
         table, p_name = point.split('.')
         columns = getattr(data, '{}_by_column'.format(table))()
@@ -259,13 +260,14 @@ def config_graph(graph):
                     'field': field,
                 })
                 fmt['val'] = val.format(**fmt)
-                config.append("{source}.{field} {val}".format(**fmt))
+                p_config.append("{source}.{field} {val}".format(**fmt))
 
-    print "graph_order", ' '.join(order)
-    print '\n'.join(config)
+    config.append(' '.join(order))
+    config.extend(p_config)
+    return '\n'.join(config)
 
 def config(data):
-    map(config_graph, graphs)
+    print '\n'.join(map(config_graph, graphs))
 
 def main(data):
     for table, keys in graph.items():
