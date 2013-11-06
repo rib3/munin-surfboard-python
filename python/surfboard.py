@@ -214,6 +214,9 @@ def test(data):
         'stats': data.stats_by_column(),
     })
 
+# Used to label channels
+GRAPH_IDS = 'ABCD'
+
 graph = {
     'down': {
         'snr': {
@@ -239,7 +242,7 @@ def config(data):
     for table, table_points in graph.items():
         columns = getattr(data, '{}_by_column'.format(table))()
         for i, column in enumerate(columns):
-            id = i + 1
+            id = GRAPH_IDS[i]
             for point, p_info in table_points.items():
                 for field, val in p_info.items():
                     fmt = {
