@@ -1,12 +1,45 @@
 from decimal import Decimal
 from unittest import TestCase
-from surfboard import pluralize, SignalData, strip_lower, zip_and_dict
+from surfboard import pluralize, SignalData, strip_lower, zip_and_dict, handle_args, DEFAULT_URL
 from xml.etree import ElementTree as ET
 
 __all__ = (
+    'TestArgs',
     'SignalDataTestCase', 'SignalDataTestCaseTwo',
     'SDOneDownOnlyTestCase',
 )
+
+class TestArgs(TestCase):
+    def test_no_args(self):
+        args = handle_args([])
+        self.assertEquals(None, args.mode)
+        self.assertEquals(DEFAULT_URL, args.html)
+
+    def test_test_mode(self):
+        args = handle_args(['test'])
+        self.assertEquals('test', args.mode)
+        self.assertEquals(DEFAULT_URL, args.html)
+
+    def test_config_mode(self):
+        args = handle_args(['config'])
+        self.assertEquals('config', args.mode)
+        self.assertEquals(DEFAULT_URL, args.html)
+
+    def test_html_only(self):
+        args = handle_args(['file.html'])
+        self.assertEquals(None, args.mode)
+        self.assertEquals('file.html', args.html)
+
+    def test_test_and_html(self):
+        args = handle_args(['test', 'file.html'])
+        self.assertEquals('test', args.mode)
+        self.assertEquals('file.html', args.html)
+
+    def test_config_and_html(self):
+        args = handle_args(['config', 'file.html'])
+        self.assertEquals('config', args.mode)
+        self.assertEquals('file.html', args.html)
+
 
 def ts_lower(elem):
     return ET.tostring(elem).lower()
