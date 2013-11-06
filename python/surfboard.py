@@ -231,7 +231,8 @@ graph = {
 
 def config(data):
     print "graph_title Moto Surfboard Signal/Power"
-    print "graph_order down_snr up_power"
+    # Order by all possible data points (vs fancy code)
+    print "graph_order down_snr1 down_snr2 down_snr3 down_snr4 up_power1 up_power2 up_power3"
     print "graph_vlabel dB (down) / dBmV (up)"
     print "graph_category network"
 
