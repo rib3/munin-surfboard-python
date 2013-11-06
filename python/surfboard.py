@@ -268,7 +268,7 @@ def main(data):
     for table, keys in graph.items():
         columns = getattr(data, '{}_by_column'.format(table))()
         for i, info in enumerate(columns):
-            id = i + 1
+            id = GRAPH_IDS[i]
             for key in keys:
                 source = "{}_{}{}".format(table, key, id)
                 val = info.get(key)
