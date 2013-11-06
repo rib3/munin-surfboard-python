@@ -237,11 +237,12 @@ graphs = [
 ]
 
 class GraphPoint(object):
-    def __init__(self, table, point, id, extra):
+    def __init__(self, table, point, id, extra, value=None):
         self.table = table
         self.point = point
         self.id = id
         self.extra = extra
+        self._value = value
 
     @property
     def source(self):
@@ -255,6 +256,27 @@ class GraphPoint(object):
 
         return '\n'.join(config)
 
+    @property
+    def value(self):
+        if self._value is None:
+            return 'U' # Munin code for unavailable
+        return self._value
+
+    def value_line(self):
+        return "{}.value {}".format(self.source, self.value)
+
+def setup_graph_points(graph):
+    points = []
+    for point, p_info in graph.get('points', []):
+        table, p_name = point.split('.')
+        columns = getattr(data, '{}_by_column'.format(table))()
+        for i, column in enumerate(columns):
+            id = GRAPH_IDS[i]
+            point = GraphPoint(table, p_name, id,
+                    extra=p_info.items(), value=column.get(p_name))
+            points.append(point)
+    return points
+
 def config_graph(graph):
     config = []
     for key in 'graph', 'title', 'order', 'vlabel', 'category':
@@ -263,16 +285,9 @@ def config_graph(graph):
             print "graph_{} {}".format(key, val)
 
     p_config, order = [], ['graph_order']
-    for point, p_info in graph.get('points', []):
-        table, p_name = point.split('.')
-        columns = getattr(data, '{}_by_column'.format(table))()
-        for i, column in enumerate(columns):
-            id = GRAPH_IDS[i]
-            gp = GraphPoint(table, p_name, id, p_info.items())
-            # Add this line to unify main and config loop
-            # val=p_info.get(p_name)
-            order.append(gp.source)
-            p_config.append(gp.config())
+    for point in setup_graph_points(graph):
+        order.append(point.source)
+        p_config.append(point.config())
 
     config.append(' '.join(order))
     config.extend(p_config)
@@ -282,17 +297,11 @@ def config(data):
     print '\n'.join(map(config_graph, graphs))
 
 def main(data):
+    values = []
     for graph in graphs:
-        for point, p_info in graph.get('points', []):
-            table, p_name = point.split('.')
-            columns = getattr(data, '{}_by_column'.format(table))()
-            for i, info in enumerate(columns):
-                id = GRAPH_IDS[i]
-                source = "{}_{}{}".format(table, p_name, id)
-                val = info.get(p_name)
-                if val is None:
-                    val = 'U' # Munin code for unavailable
-                print "{}.value {}".format(source, val)
+        for point in setup_graph_points(graph):
+            values.append(point.value_line())
+    print '\n'.join(values)
 
 def handle_args(args=None):
     MODES = 'test', 'config'
