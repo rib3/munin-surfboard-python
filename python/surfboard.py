@@ -296,7 +296,7 @@ def config_graph(graph):
 def config(data):
     print '\n'.join(map(config_graph, graphs))
 
-def main(data):
+def values(data):
     values = []
     for graph in graphs:
         for point in setup_graph_points(graph):
@@ -326,4 +326,4 @@ if __name__ == '__main__':
     elif args.mode == 'config':
         config(data)
     else:
-        main(data)
+        values(data)
