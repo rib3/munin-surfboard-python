@@ -16,6 +16,18 @@ parser = argparse.ArgumentParser()
 parser.add_argument('mode', nargs='?')
 parser.add_argument('html', nargs='?')
 
+__all__ = (
+    'DEFAULT_URL',
+    'pluralize',
+    'strip_lower', 'zip_and_dict',
+    'convert_text', 'intify_text', 'contains',
+    'get_table', 'table_getter', 'get_row', 'row_getter',
+    'get_fields', 'field_getter', 'column_getter', 'load_data',
+    'SignalData', 'GraphPoint',
+    'setup_graph_points', 'config_graph', 'config', 'values',
+    'handle_args',
+)
+
 def pluralize(word):
     """HORRIBLE WAY TO PLURALIZE A WORD!!!
 
