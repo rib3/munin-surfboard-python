@@ -285,8 +285,8 @@ def setup_graph_points(graph):
         columns = getattr(data, '{}_by_column'.format(table))()
         for i, column in enumerate(columns):
             id = GRAPH_IDS[i]
-            point = GraphPoint(table, p_name, id,
-                    extra=p_info.items(), value=column.get(p_name))
+            point = GraphPoint(table, p_name, id, p_info.items(),
+                               column.get(p_name))
             points.append(point)
     return points
 
