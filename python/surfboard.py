@@ -308,14 +308,14 @@ def config_graph(graph):
     return '\n'.join(config)
 
 def config(data):
-    print '\n'.join(map(config_graph, graphs))
+    return '\n'.join(map(config_graph, graphs))
 
 def values(data):
     values = []
     for graph in graphs:
         for point in setup_graph_points(graph):
             values.append(point.value_line())
-    print '\n'.join(values)
+    return '\n'.join(values)
 
 def handle_args(args=None):
     MODES = 'test', 'config'
@@ -338,6 +338,6 @@ if __name__ == '__main__':
     if args.mode == 'test':
         test(data)
     elif args.mode == 'config':
-        config(data)
+        print config(data)
     else:
-        values(data)
+        print values(data)
