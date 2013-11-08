@@ -249,6 +249,7 @@ graphs = [
 ]
 
 class GraphPoint(object):
+    """GraphPoint object, can be used to generate configs or values"""
     def __init__(self, table, point, id, extra, value=None):
         self.table = table
         self.point = point
