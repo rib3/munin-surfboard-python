@@ -1,6 +1,6 @@
 from decimal import Decimal
 from unittest import TestCase
-from surfboard import pluralize, SignalData, strip_lower, zip_and_dict, handle_args, DEFAULT_URL
+from surfboard import *
 from xml.etree import ElementTree as ET
 
 __all__ = (
