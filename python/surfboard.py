@@ -24,6 +24,28 @@ __all__ = (
 
 DEFAULT_URL = 'http://192.168.100.1/cmSignalData.htm'
 
+# Used to label channels
+GRAPH_IDS = 'ABCD'
+
+graphs = [
+    {
+        'graph': 'simple',
+        'title': "graph_title Moto Surfboard Signal/Power",
+        'vlabel': 'dB (down) / dBmV (up)',
+        'graph_category': 'network',
+        'points': [
+            ('down.snr', {
+                'label': 'Downstream {id} SnR',
+                'vlabel': 'dB',
+            }),
+            ('up.power', {
+                'label': 'Upstream {id} Power',
+                'vlabel': 'dBmV',
+            }),
+        ],
+    },
+]
+
 parser = argparse.ArgumentParser()
 parser.add_argument('mode', nargs='?')
 parser.add_argument('html', nargs='?')
@@ -226,28 +248,6 @@ def test(data):
         'stats': data.stats_by_column(),
     })
 
-# Used to label channels
-GRAPH_IDS = 'ABCD'
-
-graphs = [
-    {
-        'graph': 'simple',
-        'title': "graph_title Moto Surfboard Signal/Power",
-        'vlabel': 'dB (down) / dBmV (up)',
-        'graph_category': 'network',
-        'points': [
-            ('down.snr', {
-                'label': 'Downstream {id} SnR',
-                'vlabel': 'dB',
-            }),
-            ('up.power', {
-                'label': 'Upstream {id} Power',
-                'vlabel': 'dBmV',
-            }),
-        ],
-    },
-]
-
 class GraphPoint(object):
     """GraphPoint object, can be used to generate configs or values"""
     def __init__(self, table, point, id, extra, value=None):
@@ -277,6 +277,7 @@ class GraphPoint(object):
 
     def value_line(self):
         return "{}.value {}".format(self.source, self.value)
+
 
 def setup_graph_points(graph):
     points = []
