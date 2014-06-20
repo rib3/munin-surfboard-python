@@ -334,7 +334,7 @@ def config_graph(graph):
     return '\n'.join(config)
 
 def config(data):
-    return '\n'.join(map(config_graph, graphs))
+    return '\n\n'.join(map(config_graph, graphs))
 
 def values(data):
     values = []
