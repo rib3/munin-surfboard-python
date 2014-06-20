@@ -30,7 +30,7 @@ GRAPH_IDS = 'ABCD'
 graphs = [
     {
         'graph': 'simple',
-        'title': "graph_title Moto Surfboard Signal/Power",
+        'title': "Moto Surfboard Signal/Power",
         'vlabel': 'dB (down) / dBmV (up)',
         'graph_category': 'network',
         'points': [
@@ -46,7 +46,7 @@ graphs = [
     },
     {
         'graph': 'simple',
-        'title': "graph_title Moto Surfboard Stats",
+        'title': "Moto Surfboard Stats",
         'vlabel': 'codewords',
         'graph_category': 'network',
         'points': [
