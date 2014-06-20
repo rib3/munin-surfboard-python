@@ -44,6 +44,29 @@ graphs = [
             }),
         ],
     },
+    {
+        'graph': 'simple',
+        'title': "graph_title Moto Surfboard Stats",
+        'vlabel': 'codewords',
+        'graph_category': 'network',
+        'points': [
+            ('stats.unerrored', {
+                'type': 'counter',
+                'label': 'Unerrored',
+                'vlabel': 'unerrored',
+            }),
+            ('stats.correctable', {
+                'type': 'counter',
+                'label': 'Correctable Errors',
+                'vlabel': 'correctable',
+            }),
+            ('stats.uncorrectable', {
+                'type': 'counter',
+                'label': 'Uncorrectable Errors',
+                'vlabel': 'uncorrectable',
+            }),
+        ],
+    },
 ]
 
 parser = argparse.ArgumentParser()
