@@ -320,7 +320,8 @@ def config_graph(graph):
         val = graph.get(key)
         if val is not None:
             if key == 'graph':
-                config.append("multigraph {}".format(val))
+                pass
+                #config.append("multigraph {}".format(val))
             else:
                 config.append("graph_{} {}".format(key, val))
 
@@ -334,7 +335,7 @@ def config_graph(graph):
     return '\n'.join(config)
 
 def config(data):
-    return '\n\n'.join(map(config_graph, graphs))
+    return '\n\n'.join(map(config_graph, graphs[:1]))
 
 def values(data):
     values = []
