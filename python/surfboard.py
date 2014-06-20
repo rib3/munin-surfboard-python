@@ -45,7 +45,7 @@ graphs = [
         ],
     },
     {
-        'graph': 'simple',
+        'graph': 'stats',
         'title': "Moto Surfboard Stats",
         'vlabel': 'codewords',
         'graph_category': 'network',
