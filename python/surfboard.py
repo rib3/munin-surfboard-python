@@ -319,7 +319,7 @@ def config_graph(graph):
     for key in 'graph', 'title', 'order', 'vlabel', 'category':
         val = graph.get(key)
         if val is not None:
-            print "graph_{} {}".format(key, val)
+            config.append("graph_{} {}".format(key, val))
 
     p_config, order = [], ['graph_order']
     for point in setup_graph_points(graph):
