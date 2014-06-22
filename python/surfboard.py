@@ -302,7 +302,7 @@ class GraphPoint(object):
         return "{}.value {}".format(self.source, self.value)
 
 
-def setup_graph_points(graph):
+def setup_graph_points(data, graph):
     points = []
     for point, p_info in graph.get('points', []):
         table, p_name = point.split('.')
@@ -314,7 +314,7 @@ def setup_graph_points(graph):
             points.append(point)
     return points
 
-def config_graph(graph):
+def config_graph(data, graph):
     config = []
     for key in 'graph', 'title', 'order', 'vlabel', 'category':
         val = graph.get(key)
@@ -326,7 +326,7 @@ def config_graph(graph):
                 config.append("graph_{} {}".format(key, val))
 
     p_config, order = [], ['graph_order']
-    for point in setup_graph_points(graph):
+    for point in setup_graph_points(data, graph):
         order.append(point.source)
         p_config.append(point.config())
 
@@ -335,12 +335,12 @@ def config_graph(graph):
     return '\n'.join(config)
 
 def config(data):
-    return '\n\n'.join(map(config_graph, graphs[:1]))
+    return '\n\n'.join(map(partial(config_graph, data), graphs))
 
 def values(data):
     values = []
     for graph in graphs:
-        for point in setup_graph_points(graph):
+        for point in setup_graph_points(data, graph):
             values.append(point.value_line())
     return '\n'.join(values)
 
