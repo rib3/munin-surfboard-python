@@ -106,6 +106,24 @@ class SignalDataTestCase(TestCase):
     stats_correctables = [27, 47, 13, 10]
     stats_uncorrectables = [1354, 664, 698, 701]
 
+    config = """graph_title Moto Surfboard Signal/Power
+graph_vlabel dB (down) / dBmV (up)
+graph_order down_snrA down_snrB down_snrC down_snrD up_powerA up_powerB up_powerC
+down_snrA.vlabel dB
+down_snrA.label Downstream A SnR
+down_snrB.vlabel dB
+down_snrB.label Downstream B SnR
+down_snrC.vlabel dB
+down_snrC.label Downstream C SnR
+down_snrD.vlabel dB
+down_snrD.label Downstream D SnR
+up_powerA.vlabel dBmV
+up_powerA.label Upstream A Power
+up_powerB.vlabel dBmV
+up_powerB.label Upstream B Power
+up_powerC.vlabel dBmV
+up_powerC.label Upstream C Power"""
+
     @classmethod
     def setUpClass(cls):
         super(SignalDataTestCase, cls).setUpClass()
@@ -120,6 +138,9 @@ class SignalDataTestCase(TestCase):
 
     def test_signal_data(self):
         self.assertIsNotNone(self.signal_data)
+
+    def test_config(self):
+        self.assertEquals(self.config, config(self.signal_data))
 
     tables = {
         'down': {
