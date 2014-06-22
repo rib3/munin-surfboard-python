@@ -358,7 +358,7 @@ def handle_args(args=None):
 
     return args
 
-if __name__ == '__main__':
+def main():
     args = handle_args()
     data = SignalData(args.html)
 
@@ -368,3 +368,6 @@ if __name__ == '__main__':
         print config(data)
     else:
         print values(data)
+
+if __name__ == '__main__':
+    main()
