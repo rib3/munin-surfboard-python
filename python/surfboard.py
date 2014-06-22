@@ -334,10 +334,10 @@ def config_graph(data, graph):
     config.extend(p_config)
     return '\n'.join(config)
 
-def config(data):
+def config(data, graphs):
     return '\n\n'.join(map(partial(config_graph, data), graphs))
 
-def values(data):
+def values(data, graphs):
     values = []
     for graph in graphs:
         for point in setup_graph_points(data, graph):
@@ -361,13 +361,17 @@ def handle_args(args=None):
 def main():
     args = handle_args()
     data = SignalData(args.html)
+    if 'multi' in sys.argv[0]:
+        do_graphs = graphs
+    else:
+        do_graphs = graphs[:1]
 
     if args.mode == 'test':
         test(data)
     elif args.mode == 'config':
-        print config(data)
+        print config(data, do_graphs)
     else:
-        print values(data)
+        print values(data, do_graphs)
 
 if __name__ == '__main__':
     main()
