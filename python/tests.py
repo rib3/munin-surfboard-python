@@ -140,7 +140,7 @@ up_powerC.label Upstream C Power"""
         self.assertIsNotNone(self.signal_data)
 
     def test_config(self):
-        self.assertEquals(self.config, config(self.signal_data))
+        self.assertEquals(self.config, config(self.signal_data, True))
 
     tables = {
         'down': {
