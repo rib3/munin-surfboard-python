@@ -227,3 +227,9 @@ class SDOneDownOnlyTestCase(SignalDataTestCase):
     stats_unerroreds = [183209]
     stats_correctables = [11]
     stats_uncorrectables = [658]
+
+    config = """graph_title Moto Surfboard Signal/Power
+graph_vlabel dB (down) / dBmV (up)
+graph_order down_snrA
+down_snrA.vlabel dB
+down_snrA.label Downstream A SnR"""
