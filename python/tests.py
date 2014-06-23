@@ -106,9 +106,11 @@ class SignalDataTestCase(TestCase):
     stats_correctables = [27, 47, 13, 10]
     stats_uncorrectables = [1354, 664, 698, 701]
 
-    config = """graph_title Moto Surfboard Signal/Power
+    config = """multigraph surfboard_snr_power
+graph_title Moto Surfboard Signal/Power
 graph_vlabel dB (down) / dBmV (up)
 graph_order down_snrA down_snrB down_snrC down_snrD up_powerA up_powerB up_powerC
+
 down_snrA.vlabel dB
 down_snrA.label Downstream A SnR
 down_snrB.vlabel dB
@@ -122,7 +124,49 @@ up_powerA.label Upstream A Power
 up_powerB.vlabel dBmV
 up_powerB.label Upstream B Power
 up_powerC.vlabel dBmV
-up_powerC.label Upstream C Power"""
+up_powerC.label Upstream C Power
+
+multigraph surfboard_stats
+graph_title Moto Surfboard Stats
+graph_vlabel codewords
+graph_order stats_unerroredA stats_unerroredB stats_unerroredC stats_unerroredD stats_correctableA stats_correctableB stats_correctableC stats_correctableD stats_uncorrectableA stats_uncorrectableB stats_uncorrectableC stats_uncorrectableD
+
+stats_unerroredA.type counter
+stats_unerroredA.vlabel unerrored
+stats_unerroredA.label Unerrored
+stats_unerroredB.type counter
+stats_unerroredB.vlabel unerrored
+stats_unerroredB.label Unerrored
+stats_unerroredC.type counter
+stats_unerroredC.vlabel unerrored
+stats_unerroredC.label Unerrored
+stats_unerroredD.type counter
+stats_unerroredD.vlabel unerrored
+stats_unerroredD.label Unerrored
+stats_correctableA.type counter
+stats_correctableA.vlabel correctable
+stats_correctableA.label Correctable Errors
+stats_correctableB.type counter
+stats_correctableB.vlabel correctable
+stats_correctableB.label Correctable Errors
+stats_correctableC.type counter
+stats_correctableC.vlabel correctable
+stats_correctableC.label Correctable Errors
+stats_correctableD.type counter
+stats_correctableD.vlabel correctable
+stats_correctableD.label Correctable Errors
+stats_uncorrectableA.type counter
+stats_uncorrectableA.vlabel uncorrectable
+stats_uncorrectableA.label Uncorrectable Errors
+stats_uncorrectableB.type counter
+stats_uncorrectableB.vlabel uncorrectable
+stats_uncorrectableB.label Uncorrectable Errors
+stats_uncorrectableC.type counter
+stats_uncorrectableC.vlabel uncorrectable
+stats_uncorrectableC.label Uncorrectable Errors
+stats_uncorrectableD.type counter
+stats_uncorrectableD.vlabel uncorrectable
+stats_uncorrectableD.label Uncorrectable Errors"""
 
     @classmethod
     def setUpClass(cls):
@@ -228,8 +272,25 @@ class SDOneDownOnlyTestCase(SignalDataTestCase):
     stats_correctables = [11]
     stats_uncorrectables = [658]
 
-    config = """graph_title Moto Surfboard Signal/Power
+    config = """multigraph surfboard_snr_power
+graph_title Moto Surfboard Signal/Power
 graph_vlabel dB (down) / dBmV (up)
 graph_order down_snrA
+
 down_snrA.vlabel dB
-down_snrA.label Downstream A SnR"""
+down_snrA.label Downstream A SnR
+
+multigraph surfboard_stats
+graph_title Moto Surfboard Stats
+graph_vlabel codewords
+graph_order stats_unerroredA stats_correctableA stats_uncorrectableA
+
+stats_unerroredA.type counter
+stats_unerroredA.vlabel unerrored
+stats_unerroredA.label Unerrored
+stats_correctableA.type counter
+stats_correctableA.vlabel correctable
+stats_correctableA.label Correctable Errors
+stats_uncorrectableA.type counter
+stats_uncorrectableA.vlabel uncorrectable
+stats_uncorrectableA.label Uncorrectable Errors"""
