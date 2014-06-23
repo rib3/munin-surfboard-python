@@ -320,8 +320,7 @@ def config_graph(data, graph):
         val = graph.get(key)
         if val is not None:
             if key == 'graph':
-                pass
-                #config.append("multigraph {}".format(val))
+                config.append("multigraph surfboard_{}".format(val))
             else:
                 config.append("graph_{} {}".format(key, val))
 
