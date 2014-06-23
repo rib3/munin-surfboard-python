@@ -330,6 +330,8 @@ def config_graph(data, graph):
         p_config.append(point.config())
 
     config.append(' '.join(order))
+    config.append('') # blank line
+
     config.extend(p_config)
     return '\n'.join(config)
 
