@@ -24,3 +24,5 @@
 #18 looks EARLY, PARTIAL downstream (no channel id), no upstream, partial stats
 #19 looks partial. ONE downstream, service id = n/a, ranging = continue
 #20 looks locked, power seems HIGH, "other" ranging is "T4 Time Out"
+
+#21 locked
