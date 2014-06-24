@@ -108,6 +108,7 @@ class SignalDataTestCase(TestCase):
 
     config = """multigraph surfboard_snr_power
 graph_title Moto Surfboard Signal/Power
+graph_category network
 graph_vlabel dB (down) / dBmV (up)
 graph_order down_snrA down_snrB down_snrC down_snrD up_powerA up_powerB up_powerC
 
@@ -128,6 +129,7 @@ up_powerC.label Upstream C Power
 
 multigraph surfboard_stats
 graph_title Moto Surfboard Stats
+graph_category network
 graph_vlabel codewords
 graph_order stats_unerroredA stats_unerroredB stats_unerroredC stats_unerroredD stats_correctableA stats_correctableB stats_correctableC stats_correctableD stats_uncorrectableA stats_uncorrectableB stats_uncorrectableC stats_uncorrectableD
 
@@ -274,6 +276,7 @@ class SDOneDownOnlyTestCase(SignalDataTestCase):
 
     config = """multigraph surfboard_snr_power
 graph_title Moto Surfboard Signal/Power
+graph_category network
 graph_vlabel dB (down) / dBmV (up)
 graph_order down_snrA
 
@@ -282,6 +285,7 @@ down_snrA.label Downstream A SnR
 
 multigraph surfboard_stats
 graph_title Moto Surfboard Stats
+graph_category network
 graph_vlabel codewords
 graph_order stats_unerroredA stats_correctableA stats_uncorrectableA
 
