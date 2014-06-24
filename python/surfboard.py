@@ -349,6 +349,11 @@ def values(data, multi=None):
         do_graphs = graphs[:1]
     values = []
     for graph in do_graphs:
+        if multi:
+            if values:
+                values.append('') # blank line spacer
+            graph_name = graph.get('graph')
+            values.append("multigraph surfboard_{}".format(graph_name))
         for point in setup_graph_points(data, graph):
             values.append(point.value_line())
     return '\n'.join(values)
