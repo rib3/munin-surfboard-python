@@ -316,7 +316,7 @@ def setup_graph_points(data, graph):
 
 def config_graph(data, graph):
     config = []
-    for key in 'graph', 'title', 'order', 'vlabel', 'category':
+    for key in 'graph', 'title', 'category', 'vlabel':
         val = graph.get(key)
         if val is not None:
             if key == 'graph':
