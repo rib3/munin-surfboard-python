@@ -32,7 +32,7 @@ graphs = [
         'graph': 'snr_power',
         'title': "Moto Surfboard Signal/Power",
         'vlabel': 'dB (down) / dBmV (up)',
-        'graph_category': 'network',
+        'category': 'network',
         'points': [
             ('down.snr', {
                 'label': 'Downstream {id} SnR',
@@ -48,7 +48,7 @@ graphs = [
         'graph': 'stats',
         'title': "Moto Surfboard Stats",
         'vlabel': 'codewords',
-        'graph_category': 'network',
+        'category': 'network',
         'points': [
             ('stats.unerrored', {
                 'type': 'counter',
