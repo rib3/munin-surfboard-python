@@ -51,17 +51,17 @@ graphs = [
         'category': 'network',
         'points': [
             ('stats.unerrored', {
-                'type': 'counter',
+                'type': 'COUNTER',
                 'label': 'Unerrored',
                 'vlabel': 'unerrored',
             }),
             ('stats.correctable', {
-                'type': 'counter',
+                'type': 'COUNTER',
                 'label': 'Correctable Errors',
                 'vlabel': 'correctable',
             }),
             ('stats.uncorrectable', {
-                'type': 'counter',
+                'type': 'COUNTER',
                 'label': 'Uncorrectable Errors',
                 'vlabel': 'uncorrectable',
             }),
