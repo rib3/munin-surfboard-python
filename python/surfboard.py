@@ -67,6 +67,24 @@ graphs = [
             }),
         ],
     },
+    {
+        'graph': 'errors',
+        'title': "Moto Surfboard Errors",
+        'vlabel': 'codewords',
+        'category': 'network',
+        'points': [
+            ('stats.correctable', {
+                'type': 'COUNTER',
+                'label': 'Correctable Errors',
+                'vlabel': 'correctable',
+            }),
+            ('stats.uncorrectable', {
+                'type': 'COUNTER',
+                'label': 'Uncorrectable Errors',
+                'vlabel': 'uncorrectable',
+            }),
+        ],
+    },
 ]
 
 parser = argparse.ArgumentParser()
