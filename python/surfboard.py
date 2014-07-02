@@ -51,19 +51,22 @@ graphs = [
         'category': 'network',
         'points': [
             ('stats.unerrored', {
-                'type': 'COUNTER',
                 'label': 'Unerrored',
                 'vlabel': 'unerrored',
+                'type': 'DERIVE',
+                'min': '0',
             }),
             ('stats.correctable', {
-                'type': 'COUNTER',
                 'label': 'Correctable Errors',
                 'vlabel': 'correctable',
+                'type': 'DERIVE',
+                'min': '0',
             }),
             ('stats.uncorrectable', {
-                'type': 'COUNTER',
                 'label': 'Uncorrectable Errors',
                 'vlabel': 'uncorrectable',
+                'type': 'DERIVE',
+                'min': '0',
             }),
         ],
     },
@@ -74,14 +77,16 @@ graphs = [
         'category': 'network',
         'points': [
             ('stats.correctable', {
-                'type': 'COUNTER',
                 'label': 'Correctable Errors',
                 'vlabel': 'correctable',
+                'type': 'DERIVE',
+                'min': '0',
             }),
             ('stats.uncorrectable', {
-                'type': 'COUNTER',
                 'label': 'Uncorrectable Errors',
                 'vlabel': 'uncorrectable',
+                'type': 'DERIVE',
+                'min': '0',
             }),
         ],
     },
