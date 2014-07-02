@@ -298,6 +298,11 @@ class GraphPoint(object):
         self.extra = extra
         self._value = value
 
+    def __repr__(self):
+        return ('GraphPoint(table={self.table!r}'
+                ', point={self.point!r}'
+                ', id={self.id!r})').format(self=self)
+
     @property
     def source(self):
         return "{table}_{point}{id}".format(**self.__dict__)
