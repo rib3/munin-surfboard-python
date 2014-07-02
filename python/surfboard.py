@@ -192,7 +192,7 @@ def field_getter(table, header, split=None, convert=None):
         return get_fields(t, header, split, convert)
     return func
 
-def column_getter(table, fields):
+def column_getter(table, fields, min_columns=0):
     def func(self):
         columns = []
         for field in fields:
@@ -200,6 +200,8 @@ def column_getter(table, fields):
             method = pluralize(method)
             columns.append(getattr(self, method)())
         columns = zip_and_dict(columns, fields)
+        for i in range(len(columns), min_columns):
+            columns.append({})
         return columns
     return func
 
@@ -220,6 +222,7 @@ class SignalData(object):
     tables = {
         'down': {
             'header': 'downstream',
+            'min_columns': 3,
             'rows': [
                 ('channel', 'channel'),
                 ('freq', 'frequency', ' '),
@@ -229,6 +232,7 @@ class SignalData(object):
         },
         'up': {
             'header': 'upstream',
+            'min_columns': 4,
             'rows': [
                 ('channel', 'channel'),
                 ('freq', 'frequency', ' '),
@@ -240,6 +244,7 @@ class SignalData(object):
         },
         'stats': {
             'header': 'signal stats (codewords)',
+            'min_columns': 4,
             'rows': [
                 ('channel', 'channel id'),
                 ('unerrored', 'total unerrored'),
@@ -261,6 +266,7 @@ def setup_signal_data():
         table_header = info['header']
         setattr(cls, '{}_table'.format(table), table_getter(table_header))
 
+        min_columns = info.get('min_columns', 0)
         rows = info.get('rows', [])
         for row in rows:
             name, row_header, sep, convert = (row + (None, None))[:4]
@@ -270,7 +276,7 @@ def setup_signal_data():
             setattr(cls, pluralize(full_name), field_getter(*args))
 
         setattr(cls, '{}_by_column'.format(table),
-            column_getter(table, [r[0] for r in rows]))
+            column_getter(table, [r[0] for r in rows], min_columns))
 
 setup_signal_data()
 
