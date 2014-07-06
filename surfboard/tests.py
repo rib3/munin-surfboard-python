@@ -255,7 +255,7 @@ class SignalDataTestCaseTwo(SignalDataTestCase):
 
 
 class SDOneDownOnlyTestCase(SignalDataTestCase):
-    source_dir = ('..', 'testdata', )
+    source_dir = (dirname(__file__), '..', 'testdata', )
     source_file = 'one_down_only.htm'
 
     down_channels = [144]
