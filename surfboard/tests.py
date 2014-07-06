@@ -1,5 +1,5 @@
 from decimal import Decimal
-from os.path import dirname
+from os.path import dirname, join
 from surfboard import *
 from unittest import TestCase
 from xml.etree import ElementTree as ET
@@ -89,6 +89,7 @@ class SignalDataTestCase(TestCase):
     source_dir = (dirname(__file__), '..', 'testdata', )
     #source_file = 'cmSignalData.htm.1'
     source_file = 'working.htm'
+    config_file = 'working'
 
     down_channels = [144, 141, 142, 143]
     down_freqs = [699000000, 681000000, 687000000, 693000000]
@@ -107,70 +108,6 @@ class SignalDataTestCase(TestCase):
     stats_correctables = [27, 47, 13, 10]
     stats_uncorrectables = [1354, 664, 698, 701]
 
-    config = """multigraph surfboard_snr_power
-graph_title Moto Surfboard Signal/Power
-graph_category network
-graph_vlabel dB (down) / dBmV (up)
-graph_order down_snrA down_snrB down_snrC down_snrD up_powerA up_powerB up_powerC
-
-down_snrA.vlabel dB
-down_snrA.label Downstream A SnR
-down_snrB.vlabel dB
-down_snrB.label Downstream B SnR
-down_snrC.vlabel dB
-down_snrC.label Downstream C SnR
-down_snrD.vlabel dB
-down_snrD.label Downstream D SnR
-up_powerA.vlabel dBmV
-up_powerA.label Upstream A Power
-up_powerB.vlabel dBmV
-up_powerB.label Upstream B Power
-up_powerC.vlabel dBmV
-up_powerC.label Upstream C Power
-
-multigraph surfboard_stats
-graph_title Moto Surfboard Stats
-graph_category network
-graph_vlabel codewords
-graph_order stats_unerroredA stats_unerroredB stats_unerroredC stats_unerroredD stats_correctableA stats_correctableB stats_correctableC stats_correctableD stats_uncorrectableA stats_uncorrectableB stats_uncorrectableC stats_uncorrectableD
-
-stats_unerroredA.type counter
-stats_unerroredA.vlabel unerrored
-stats_unerroredA.label Unerrored
-stats_unerroredB.type counter
-stats_unerroredB.vlabel unerrored
-stats_unerroredB.label Unerrored
-stats_unerroredC.type counter
-stats_unerroredC.vlabel unerrored
-stats_unerroredC.label Unerrored
-stats_unerroredD.type counter
-stats_unerroredD.vlabel unerrored
-stats_unerroredD.label Unerrored
-stats_correctableA.type counter
-stats_correctableA.vlabel correctable
-stats_correctableA.label Correctable Errors
-stats_correctableB.type counter
-stats_correctableB.vlabel correctable
-stats_correctableB.label Correctable Errors
-stats_correctableC.type counter
-stats_correctableC.vlabel correctable
-stats_correctableC.label Correctable Errors
-stats_correctableD.type counter
-stats_correctableD.vlabel correctable
-stats_correctableD.label Correctable Errors
-stats_uncorrectableA.type counter
-stats_uncorrectableA.vlabel uncorrectable
-stats_uncorrectableA.label Uncorrectable Errors
-stats_uncorrectableB.type counter
-stats_uncorrectableB.vlabel uncorrectable
-stats_uncorrectableB.label Uncorrectable Errors
-stats_uncorrectableC.type counter
-stats_uncorrectableC.vlabel uncorrectable
-stats_uncorrectableC.label Uncorrectable Errors
-stats_uncorrectableD.type counter
-stats_uncorrectableD.vlabel uncorrectable
-stats_uncorrectableD.label Uncorrectable Errors"""
-
     @classmethod
     def setUpClass(cls):
         super(SignalDataTestCase, cls).setUpClass()
@@ -178,6 +115,8 @@ stats_uncorrectableD.label Uncorrectable Errors"""
         cls._source_parts = cls.source_dir + (cls.source_file, )
         cls._source_path = '/'.join(cls._source_parts)
         cls._signal_data = SignalData(cls._source_path)
+
+        cls.config_path = join(*(cls.source_dir + ('config', cls.config_file)))
 
     def setUp(self):
         super(SignalDataTestCase, self).setUp()
@@ -187,7 +126,9 @@ stats_uncorrectableD.label Uncorrectable Errors"""
         self.assertIsNotNone(self.signal_data)
 
     def test_config(self):
-        self.assertEquals(self.config, config(self.signal_data, True))
+        with open(self.__class__.config_path) as f:
+            config_content = f.read().rstrip()
+        self.assertEquals(config_content, config(self.signal_data, True))
 
     tables = {
         'down': {
