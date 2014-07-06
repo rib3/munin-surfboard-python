@@ -17,7 +17,7 @@ def main():
     logging.basicConfig()
         #level=verbosity_loglevel(args.verbose, logging.CRITICAL))
 
-    unittest.main(module='tests')
+    unittest.main(module='surfboard.tests')
 
 if __name__ == '__main__':
     main()
