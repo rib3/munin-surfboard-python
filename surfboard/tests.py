@@ -1,6 +1,7 @@
 from decimal import Decimal
-from unittest import TestCase
+from os.path import dirname
 from surfboard import *
+from unittest import TestCase
 from xml.etree import ElementTree as ET
 
 __all__ = (
@@ -85,7 +86,7 @@ def column_tester(table, fields):
     return func
 
 class SignalDataTestCase(TestCase):
-    source_dir = ('..', 'testdata', )
+    source_dir = (dirname(__file__), '..', 'testdata', )
     #source_file = 'cmSignalData.htm.1'
     source_file = 'working.htm'
 
