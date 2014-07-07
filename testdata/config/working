@@ -4,20 +4,20 @@ graph_category network
 graph_vlabel dB (down) / dBmV (up)
 graph_order down_snrA down_snrB down_snrC down_snrD up_powerA up_powerB up_powerC
 
-down_snrA.vlabel dB
 down_snrA.label Downstream A SnR
-down_snrB.vlabel dB
+down_snrA.vlabel dB
 down_snrB.label Downstream B SnR
-down_snrC.vlabel dB
+down_snrB.vlabel dB
 down_snrC.label Downstream C SnR
-down_snrD.vlabel dB
+down_snrC.vlabel dB
 down_snrD.label Downstream D SnR
-up_powerA.vlabel dBmV
+down_snrD.vlabel dB
 up_powerA.label Upstream A Power
-up_powerB.vlabel dBmV
+up_powerA.vlabel dBmV
 up_powerB.label Upstream B Power
-up_powerC.vlabel dBmV
+up_powerB.vlabel dBmV
 up_powerC.label Upstream C Power
+up_powerC.vlabel dBmV
 
 multigraph surfboard_stats
 graph_title Moto Surfboard Stats
@@ -25,39 +25,90 @@ graph_category network
 graph_vlabel codewords
 graph_order stats_unerroredA stats_unerroredB stats_unerroredC stats_unerroredD stats_correctableA stats_correctableB stats_correctableC stats_correctableD stats_uncorrectableA stats_uncorrectableB stats_uncorrectableC stats_uncorrectableD
 
-stats_unerroredA.type counter
-stats_unerroredA.vlabel unerrored
 stats_unerroredA.label Unerrored
-stats_unerroredB.type counter
-stats_unerroredB.vlabel unerrored
+stats_unerroredA.vlabel unerrored
+stats_unerroredA.type DERIVE
+stats_unerroredA.min 0
 stats_unerroredB.label Unerrored
-stats_unerroredC.type counter
-stats_unerroredC.vlabel unerrored
+stats_unerroredB.vlabel unerrored
+stats_unerroredB.type DERIVE
+stats_unerroredB.min 0
 stats_unerroredC.label Unerrored
-stats_unerroredD.type counter
-stats_unerroredD.vlabel unerrored
+stats_unerroredC.vlabel unerrored
+stats_unerroredC.type DERIVE
+stats_unerroredC.min 0
 stats_unerroredD.label Unerrored
-stats_correctableA.type counter
-stats_correctableA.vlabel correctable
+stats_unerroredD.vlabel unerrored
+stats_unerroredD.type DERIVE
+stats_unerroredD.min 0
 stats_correctableA.label Correctable Errors
-stats_correctableB.type counter
-stats_correctableB.vlabel correctable
+stats_correctableA.vlabel correctable
+stats_correctableA.type DERIVE
+stats_correctableA.min 0
 stats_correctableB.label Correctable Errors
-stats_correctableC.type counter
-stats_correctableC.vlabel correctable
+stats_correctableB.vlabel correctable
+stats_correctableB.type DERIVE
+stats_correctableB.min 0
 stats_correctableC.label Correctable Errors
-stats_correctableD.type counter
-stats_correctableD.vlabel correctable
+stats_correctableC.vlabel correctable
+stats_correctableC.type DERIVE
+stats_correctableC.min 0
 stats_correctableD.label Correctable Errors
-stats_uncorrectableA.type counter
-stats_uncorrectableA.vlabel uncorrectable
+stats_correctableD.vlabel correctable
+stats_correctableD.type DERIVE
+stats_correctableD.min 0
 stats_uncorrectableA.label Uncorrectable Errors
-stats_uncorrectableB.type counter
-stats_uncorrectableB.vlabel uncorrectable
+stats_uncorrectableA.vlabel uncorrectable
+stats_uncorrectableA.type DERIVE
+stats_uncorrectableA.min 0
 stats_uncorrectableB.label Uncorrectable Errors
-stats_uncorrectableC.type counter
-stats_uncorrectableC.vlabel uncorrectable
+stats_uncorrectableB.vlabel uncorrectable
+stats_uncorrectableB.type DERIVE
+stats_uncorrectableB.min 0
 stats_uncorrectableC.label Uncorrectable Errors
-stats_uncorrectableD.type counter
-stats_uncorrectableD.vlabel uncorrectable
+stats_uncorrectableC.vlabel uncorrectable
+stats_uncorrectableC.type DERIVE
+stats_uncorrectableC.min 0
 stats_uncorrectableD.label Uncorrectable Errors
+stats_uncorrectableD.vlabel uncorrectable
+stats_uncorrectableD.type DERIVE
+stats_uncorrectableD.min 0
+
+multigraph surfboard_errors
+graph_title Moto Surfboard Errors
+graph_category network
+graph_vlabel codewords
+graph_order stats_correctableA stats_correctableB stats_correctableC stats_correctableD stats_uncorrectableA stats_uncorrectableB stats_uncorrectableC stats_uncorrectableD
+
+stats_correctableA.label Correctable Errors
+stats_correctableA.vlabel correctable
+stats_correctableA.type DERIVE
+stats_correctableA.min 0
+stats_correctableB.label Correctable Errors
+stats_correctableB.vlabel correctable
+stats_correctableB.type DERIVE
+stats_correctableB.min 0
+stats_correctableC.label Correctable Errors
+stats_correctableC.vlabel correctable
+stats_correctableC.type DERIVE
+stats_correctableC.min 0
+stats_correctableD.label Correctable Errors
+stats_correctableD.vlabel correctable
+stats_correctableD.type DERIVE
+stats_correctableD.min 0
+stats_uncorrectableA.label Uncorrectable Errors
+stats_uncorrectableA.vlabel uncorrectable
+stats_uncorrectableA.type DERIVE
+stats_uncorrectableA.min 0
+stats_uncorrectableB.label Uncorrectable Errors
+stats_uncorrectableB.vlabel uncorrectable
+stats_uncorrectableB.type DERIVE
+stats_uncorrectableB.min 0
+stats_uncorrectableC.label Uncorrectable Errors
+stats_uncorrectableC.vlabel uncorrectable
+stats_uncorrectableC.type DERIVE
+stats_uncorrectableC.min 0
+stats_uncorrectableD.label Uncorrectable Errors
+stats_uncorrectableD.vlabel uncorrectable
+stats_uncorrectableD.type DERIVE
+stats_uncorrectableD.min 0
