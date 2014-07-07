@@ -1,12 +1,14 @@
 #!/usr/bin/env python
 
 from bs4 import BeautifulSoup
+from collections import OrderedDict
 from decimal import Decimal
 from functools import partial
 from xml.etree import ElementTree as ET
 from lxml import html as lxhtml
 from pprint import pprint, pformat
 from urllib import urlopen
+
 import argparse
 import sys
 
@@ -34,14 +36,14 @@ graphs = [
         'vlabel': 'dB (down) / dBmV (up)',
         'category': 'network',
         'points': [
-            ('down.snr', {
-                'label': 'Downstream {id} SnR',
-                'vlabel': 'dB',
-            }),
-            ('up.power', {
-                'label': 'Upstream {id} Power',
-                'vlabel': 'dBmV',
-            }),
+            ('down.snr', OrderedDict([
+                ('label', 'Downstream {id} SnR'),
+                ('vlabel', 'dB'),
+            ])),
+            ('up.power', OrderedDict([
+                ('label', 'Upstream {id} Power'),
+                ('vlabel', 'dBmV'),
+            ])),
         ],
     },
     {
@@ -50,24 +52,24 @@ graphs = [
         'vlabel': 'codewords',
         'category': 'network',
         'points': [
-            ('stats.unerrored', {
-                'label': 'Unerrored',
-                'vlabel': 'unerrored',
-                'type': 'DERIVE',
-                'min': '0',
-            }),
-            ('stats.correctable', {
-                'label': 'Correctable Errors',
-                'vlabel': 'correctable',
-                'type': 'DERIVE',
-                'min': '0',
-            }),
-            ('stats.uncorrectable', {
-                'label': 'Uncorrectable Errors',
-                'vlabel': 'uncorrectable',
-                'type': 'DERIVE',
-                'min': '0',
-            }),
+            ('stats.unerrored', OrderedDict([
+                ('label', 'Unerrored'),
+                ('vlabel', 'unerrored'),
+                ('type', 'DERIVE'),
+                ('min', '0'),
+            ])),
+            ('stats.correctable', OrderedDict([
+                ('label', 'Correctable Errors'),
+                ('vlabel', 'correctable'),
+                ('type', 'DERIVE'),
+                ('min', '0'),
+            ])),
+            ('stats.uncorrectable', OrderedDict([
+                ('label', 'Uncorrectable Errors'),
+                ('vlabel', 'uncorrectable'),
+                ('type', 'DERIVE'),
+                ('min', '0'),
+            ])),
         ],
     },
     {
@@ -76,18 +78,18 @@ graphs = [
         'vlabel': 'codewords',
         'category': 'network',
         'points': [
-            ('stats.correctable', {
-                'label': 'Correctable Errors',
-                'vlabel': 'correctable',
-                'type': 'DERIVE',
-                'min': '0',
-            }),
-            ('stats.uncorrectable', {
-                'label': 'Uncorrectable Errors',
-                'vlabel': 'uncorrectable',
-                'type': 'DERIVE',
-                'min': '0',
-            }),
+            ('stats.correctable', OrderedDict([
+                ('label', 'Correctable Errors'),
+                ('vlabel', 'correctable'),
+                ('type', 'DERIVE'),
+                ('min', '0'),
+            ])),
+            ('stats.uncorrectable', OrderedDict([
+                ('label', 'Uncorrectable Errors'),
+                ('vlabel', 'uncorrectable'),
+                ('type', 'DERIVE'),
+                ('min', '0'),
+            ])),
         ],
     },
 ]
