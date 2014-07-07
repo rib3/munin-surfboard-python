@@ -229,7 +229,7 @@ class SignalData(object):
     tables = {
         'down': {
             'header': 'downstream',
-            'min_columns': 3,
+            'min_columns': 4,
             'rows': [
                 ('channel', 'channel'),
                 ('freq', 'frequency', ' '),
@@ -239,7 +239,7 @@ class SignalData(object):
         },
         'up': {
             'header': 'upstream',
-            'min_columns': 4,
+            'min_columns': 3,
             'rows': [
                 ('channel', 'channel'),
                 ('freq', 'frequency', ' '),
