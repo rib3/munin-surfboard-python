@@ -70,7 +70,7 @@ def val_tester(name):
         self.assertEquals(getattr(self, name), vals)
     return func
 
-def column_tester(table, fields):
+def column_tester(table, fields, min_columns=0):
     def func(self):
         columns = []
         for field in fields:
@@ -78,6 +78,8 @@ def column_tester(table, fields):
             method = pluralize(method)
             columns.append(getattr(self, method))
         columns = zip_and_dict(columns, fields)
+        for i in range(len(columns), min_columns):
+            columns.append({})
 
         column_method = '{}_by_column'.format(table)
         self.assertEquals(columns,
@@ -136,6 +138,7 @@ class SignalDataTestCase(TestCase):
     tables = {
         'down': {
             'headers': ['downstream', 'bonding channel'],
+            'min_columns': 4,
             'rows': [
                 ('channel', 'Channel ID'),
                 ('freq', 'Frequency'),
@@ -145,6 +148,7 @@ class SignalDataTestCase(TestCase):
         },
         'up': {
             'headers': ['upstream', 'bonding channel'],
+            'min_columns': 3,
             'rows': [
                 ('channel', 'Channel ID'),
                 ('freq', 'Frequency'),
@@ -156,6 +160,7 @@ class SignalDataTestCase(TestCase):
         },
         'stats': {
             'headers': ['signal stats (codewords)', 'bonding channel'],
+            'min_columns': 4,
             'rows': [
                 ('channel', 'Channel ID'),
                 ('unerrored', 'Total Unerrored Codewords'),
@@ -180,8 +185,9 @@ for table, info in SignalDataTestCase.tables.items():
             val_tester(full_plural))
 
     fields = [name for name, _ in rows]
+    min_columns = info.get('min_columns', 0)
     setattr(cls, 'test_{}_columns'.format(table),
-        column_tester(table, fields))
+        column_tester(table, fields, min_columns))
 
 # Delete, or var will be found in module and added to testcases
 del cls
