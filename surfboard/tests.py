@@ -116,7 +116,10 @@ class SignalDataTestCase(TestCase):
         cls._source_path = '/'.join(cls._source_parts)
         cls._signal_data = SignalData(cls._source_path)
 
-        cls.config_path = join(*(cls.source_dir + ('config', cls.config_file)))
+        if not hasattr(cls, 'config'):
+            config_path = join(*(cls.source_dir + ('config', cls.config_file)))
+            with open(config_path) as f:
+                cls.config = f.read().rstrip()
 
     def setUp(self):
         super(SignalDataTestCase, self).setUp()
@@ -126,9 +129,9 @@ class SignalDataTestCase(TestCase):
         self.assertIsNotNone(self.signal_data)
 
     def test_config(self):
-        with open(self.__class__.config_path) as f:
-            config_content = f.read().rstrip()
-        self.assertEquals(config_content, config(self.signal_data, True))
+        configs = map(lambda s: s.split('\n'),
+                (self.__class__.config, config(self.signal_data)))
+        self.assertEquals(*configs)
 
     tables = {
         'down': {
