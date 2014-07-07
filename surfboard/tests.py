@@ -109,6 +109,7 @@ class SignalDataTestCase(TestCase):
     stats_unerroreds = [1454013, 813636, 813638, 813641]
     stats_correctables = [27, 47, 13, 10]
     stats_uncorrectables = [1354, 664, 698, 701]
+    maxDiff = None
 
     @classmethod
     def setUpClass(cls):
