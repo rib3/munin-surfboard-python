@@ -419,6 +419,3 @@ def main():
         print config(data, multi)
     else:
         print values(data, multi)
-
-if __name__ == '__main__':
-    main()
