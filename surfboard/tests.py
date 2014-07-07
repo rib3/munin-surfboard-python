@@ -224,28 +224,3 @@ class SDOneDownOnlyTestCase(SignalDataTestCase):
     stats_unerroreds = [183209]
     stats_correctables = [11]
     stats_uncorrectables = [658]
-
-    config = """multigraph surfboard_snr_power
-graph_title Moto Surfboard Signal/Power
-graph_category network
-graph_vlabel dB (down) / dBmV (up)
-graph_order down_snrA
-
-down_snrA.vlabel dB
-down_snrA.label Downstream A SnR
-
-multigraph surfboard_stats
-graph_title Moto Surfboard Stats
-graph_category network
-graph_vlabel codewords
-graph_order stats_unerroredA stats_correctableA stats_uncorrectableA
-
-stats_unerroredA.type counter
-stats_unerroredA.vlabel unerrored
-stats_unerroredA.label Unerrored
-stats_correctableA.type counter
-stats_correctableA.vlabel correctable
-stats_correctableA.label Correctable Errors
-stats_uncorrectableA.type counter
-stats_uncorrectableA.vlabel uncorrectable
-stats_uncorrectableA.label Uncorrectable Errors"""
