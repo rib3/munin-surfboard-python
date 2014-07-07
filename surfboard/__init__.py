@@ -273,7 +273,6 @@ def setup_signal_data():
         table_header = info['header']
         setattr(cls, '{}_table'.format(table), table_getter(table_header))
 
-        min_columns = info.get('min_columns', 0)
         rows = info.get('rows', [])
         for row in rows:
             name, row_header, sep, convert = (row + (None, None))[:4]
@@ -282,6 +281,7 @@ def setup_signal_data():
             setattr(cls, '{}_row'.format(full_name), row_getter(*args[:2]))
             setattr(cls, pluralize(full_name), field_getter(*args))
 
+        min_columns = info.get('min_columns', 0)
         setattr(cls, '{}_by_column'.format(table),
             column_getter(table, [r[0] for r in rows], min_columns))
 
