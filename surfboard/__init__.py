@@ -371,25 +371,16 @@ def config_graph(data, graph):
     config.extend(p_config)
     return '\n'.join(config)
 
-def config(data, multi=None):
-    if multi:
-        do_graphs = graphs
-    else:
-        do_graphs = graphs[:1]
-    return '\n\n'.join(map(partial(config_graph, data), do_graphs))
+def config(data):
+    return '\n\n'.join(map(partial(config_graph, data), graphs))
 
-def values(data, multi=None):
-    if multi:
-        do_graphs = graphs
-    else:
-        do_graphs = graphs[:1]
+def values(data):
     values = []
-    for graph in do_graphs:
-        if multi:
-            if values:
-                values.append('') # blank line spacer
-            graph_name = graph.get('graph')
-            values.append("multigraph surfboard_{}".format(graph_name))
+    for graph in graphs:
+        if values:
+            values.append('') # blank line spacer
+        graph_name = graph.get('graph')
+        values.append("multigraph surfboard_{}".format(graph_name))
         for point in setup_graph_points(data, graph):
             values.append(point.value_line())
     return '\n'.join(values)
@@ -411,11 +402,9 @@ def handle_args(args=None):
 def main():
     args = handle_args()
     data = SignalData(args.html)
-    multi = 'multi' in sys.argv[0]
-
     if args.mode == 'test':
         test(data)
     elif args.mode == 'config':
-        print config(data, multi)
+        print config(data)
     else:
-        print values(data, multi)
+        print values(data)
