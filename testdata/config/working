@@ -4,19 +4,19 @@ graph_category network
 graph_vlabel dB (down) / dBmV (up)
 graph_order down_snrA down_snrB down_snrC down_snrD up_powerA up_powerB up_powerC
 
-down_snrA.label Downstream A SnR
+down_snrA.label Down A SnR
 down_snrA.vlabel dB
-down_snrB.label Downstream B SnR
+down_snrB.label Down B SnR
 down_snrB.vlabel dB
-down_snrC.label Downstream C SnR
+down_snrC.label Down C SnR
 down_snrC.vlabel dB
-down_snrD.label Downstream D SnR
+down_snrD.label Down D SnR
 down_snrD.vlabel dB
-up_powerA.label Upstream A Power
+up_powerA.label Up A Power
 up_powerA.vlabel dBmV
-up_powerB.label Upstream B Power
+up_powerB.label Up B Power
 up_powerB.vlabel dBmV
-up_powerC.label Upstream C Power
+up_powerC.label Up C Power
 up_powerC.vlabel dBmV
 
 multigraph surfboard_down_power
@@ -25,13 +25,13 @@ graph_category network
 graph_vlabel dBmV
 graph_order down_powerA down_powerB down_powerC down_powerD
 
-down_powerA.label Downstream A Power
+down_powerA.label Down A Power
 down_powerA.vlabel dBmV
-down_powerB.label Downstream B Power
+down_powerB.label Down B Power
 down_powerB.vlabel dBmV
-down_powerC.label Downstream C Power
+down_powerC.label Down C Power
 down_powerC.vlabel dBmV
-down_powerD.label Downstream D Power
+down_powerD.label Down D Power
 down_powerD.vlabel dBmV
 
 multigraph surfboard_channels
