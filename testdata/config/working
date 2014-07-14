@@ -40,51 +40,51 @@ graph_category network
 graph_vlabel codewords
 graph_order stats_unerroredA stats_unerroredB stats_unerroredC stats_unerroredD stats_correctableA stats_correctableB stats_correctableC stats_correctableD stats_uncorrectableA stats_uncorrectableB stats_uncorrectableC stats_uncorrectableD
 
-stats_unerroredA.label Unerrored
+stats_unerroredA.label Unerrored A
 stats_unerroredA.vlabel unerrored
 stats_unerroredA.type DERIVE
 stats_unerroredA.min 0
-stats_unerroredB.label Unerrored
+stats_unerroredB.label Unerrored B
 stats_unerroredB.vlabel unerrored
 stats_unerroredB.type DERIVE
 stats_unerroredB.min 0
-stats_unerroredC.label Unerrored
+stats_unerroredC.label Unerrored C
 stats_unerroredC.vlabel unerrored
 stats_unerroredC.type DERIVE
 stats_unerroredC.min 0
-stats_unerroredD.label Unerrored
+stats_unerroredD.label Unerrored D
 stats_unerroredD.vlabel unerrored
 stats_unerroredD.type DERIVE
 stats_unerroredD.min 0
-stats_correctableA.label Correctable Errors
+stats_correctableA.label Correctable Errors A
 stats_correctableA.vlabel correctable
 stats_correctableA.type DERIVE
 stats_correctableA.min 0
-stats_correctableB.label Correctable Errors
+stats_correctableB.label Correctable Errors B
 stats_correctableB.vlabel correctable
 stats_correctableB.type DERIVE
 stats_correctableB.min 0
-stats_correctableC.label Correctable Errors
+stats_correctableC.label Correctable Errors C
 stats_correctableC.vlabel correctable
 stats_correctableC.type DERIVE
 stats_correctableC.min 0
-stats_correctableD.label Correctable Errors
+stats_correctableD.label Correctable Errors D
 stats_correctableD.vlabel correctable
 stats_correctableD.type DERIVE
 stats_correctableD.min 0
-stats_uncorrectableA.label Uncorrectable Errors
+stats_uncorrectableA.label Uncorrectable Errors A
 stats_uncorrectableA.vlabel uncorrectable
 stats_uncorrectableA.type DERIVE
 stats_uncorrectableA.min 0
-stats_uncorrectableB.label Uncorrectable Errors
+stats_uncorrectableB.label Uncorrectable Errors B
 stats_uncorrectableB.vlabel uncorrectable
 stats_uncorrectableB.type DERIVE
 stats_uncorrectableB.min 0
-stats_uncorrectableC.label Uncorrectable Errors
+stats_uncorrectableC.label Uncorrectable Errors C
 stats_uncorrectableC.vlabel uncorrectable
 stats_uncorrectableC.type DERIVE
 stats_uncorrectableC.min 0
-stats_uncorrectableD.label Uncorrectable Errors
+stats_uncorrectableD.label Uncorrectable Errors D
 stats_uncorrectableD.vlabel uncorrectable
 stats_uncorrectableD.type DERIVE
 stats_uncorrectableD.min 0
@@ -95,35 +95,35 @@ graph_category network
 graph_vlabel codewords
 graph_order stats_correctableA stats_correctableB stats_correctableC stats_correctableD stats_uncorrectableA stats_uncorrectableB stats_uncorrectableC stats_uncorrectableD
 
-stats_correctableA.label Correctable Errors
+stats_correctableA.label Correctable Errors A
 stats_correctableA.vlabel correctable
 stats_correctableA.type DERIVE
 stats_correctableA.min 0
-stats_correctableB.label Correctable Errors
+stats_correctableB.label Correctable Errors B
 stats_correctableB.vlabel correctable
 stats_correctableB.type DERIVE
 stats_correctableB.min 0
-stats_correctableC.label Correctable Errors
+stats_correctableC.label Correctable Errors C
 stats_correctableC.vlabel correctable
 stats_correctableC.type DERIVE
 stats_correctableC.min 0
-stats_correctableD.label Correctable Errors
+stats_correctableD.label Correctable Errors D
 stats_correctableD.vlabel correctable
 stats_correctableD.type DERIVE
 stats_correctableD.min 0
-stats_uncorrectableA.label Uncorrectable Errors
+stats_uncorrectableA.label Uncorrectable Errors A
 stats_uncorrectableA.vlabel uncorrectable
 stats_uncorrectableA.type DERIVE
 stats_uncorrectableA.min 0
-stats_uncorrectableB.label Uncorrectable Errors
+stats_uncorrectableB.label Uncorrectable Errors B
 stats_uncorrectableB.vlabel uncorrectable
 stats_uncorrectableB.type DERIVE
 stats_uncorrectableB.min 0
-stats_uncorrectableC.label Uncorrectable Errors
+stats_uncorrectableC.label Uncorrectable Errors C
 stats_uncorrectableC.vlabel uncorrectable
 stats_uncorrectableC.type DERIVE
 stats_uncorrectableC.min 0
-stats_uncorrectableD.label Uncorrectable Errors
+stats_uncorrectableD.label Uncorrectable Errors D
 stats_uncorrectableD.vlabel uncorrectable
 stats_uncorrectableD.type DERIVE
 stats_uncorrectableD.min 0
