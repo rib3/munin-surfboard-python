@@ -58,19 +58,19 @@ graphs = [
         'category': 'network',
         'points': [
             ('stats.unerrored', OrderedDict([
-                ('label', 'Unerrored'),
+                ('label', 'Unerrored {id}'),
                 ('vlabel', 'unerrored'),
                 ('type', 'DERIVE'),
                 ('min', '0'),
             ])),
             ('stats.correctable', OrderedDict([
-                ('label', 'Correctable Errors'),
+                ('label', 'Correctable Errors {id}'),
                 ('vlabel', 'correctable'),
                 ('type', 'DERIVE'),
                 ('min', '0'),
             ])),
             ('stats.uncorrectable', OrderedDict([
-                ('label', 'Uncorrectable Errors'),
+                ('label', 'Uncorrectable Errors {id}'),
                 ('vlabel', 'uncorrectable'),
                 ('type', 'DERIVE'),
                 ('min', '0'),
@@ -84,13 +84,13 @@ graphs = [
         'category': 'network',
         'points': [
             ('stats.correctable', OrderedDict([
-                ('label', 'Correctable Errors'),
+                ('label', 'Correctable Errors {id}'),
                 ('vlabel', 'correctable'),
                 ('type', 'DERIVE'),
                 ('min', '0'),
             ])),
             ('stats.uncorrectable', OrderedDict([
-                ('label', 'Uncorrectable Errors'),
+                ('label', 'Uncorrectable Errors {id}'),
                 ('vlabel', 'uncorrectable'),
                 ('type', 'DERIVE'),
                 ('min', '0'),
