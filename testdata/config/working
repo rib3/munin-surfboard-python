@@ -19,6 +19,21 @@ up_powerB.vlabel dBmV
 up_powerC.label Upstream C Power
 up_powerC.vlabel dBmV
 
+multigraph surfboard_down_power
+graph_title Moto Surfboard Downstream Power Level
+graph_category network
+graph_vlabel dBmV
+graph_order down_powerA down_powerB down_powerC down_powerD
+
+down_powerA.label Downstream A Power
+down_powerA.vlabel dBmV
+down_powerB.label Downstream B Power
+down_powerB.vlabel dBmV
+down_powerC.label Downstream C Power
+down_powerC.vlabel dBmV
+down_powerD.label Downstream D Power
+down_powerD.vlabel dBmV
+
 multigraph surfboard_stats
 graph_title Moto Surfboard Stats
 graph_category network

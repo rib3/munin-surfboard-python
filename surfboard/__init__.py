@@ -40,6 +40,18 @@ graphs = [
         ],
     },
     {
+        'graph': 'down_power',
+        'title': "Moto Surfboard Downstream Power Level",
+        'vlabel': 'dBmV',
+        'category': 'network',
+        'points': [
+            ('down.power', OrderedDict([
+                ('label', 'Downstream {id} Power'),
+                ('vlabel', 'dBmV'),
+            ])),
+        ],
+    },
+    {
         'graph': 'stats',
         'title': "Moto Surfboard Stats",
         'vlabel': 'codewords',
