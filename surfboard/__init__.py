@@ -2,13 +2,11 @@ from bs4 import BeautifulSoup
 from collections import OrderedDict
 from decimal import Decimal
 from functools import partial
-from xml.etree import ElementTree as ET
 from lxml import html as lxhtml
-from pprint import pprint, pformat
+from pprint import pprint
 from urllib import urlopen
 
 import argparse
-import sys
 import string
 
 __all__ = (
