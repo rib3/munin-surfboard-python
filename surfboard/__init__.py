@@ -11,6 +11,7 @@ from urllib import urlopen
 
 import argparse
 import sys
+import string
 
 __all__ = (
     'DEFAULT_URL',
@@ -27,7 +28,7 @@ __all__ = (
 DEFAULT_URL = 'http://192.168.100.1/cmSignalData.htm'
 
 # Used to label channels
-GRAPH_IDS = 'ABCD'
+GRAPH_IDS = string.uppercase
 
 graphs = [
     {
