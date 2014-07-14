@@ -48,6 +48,27 @@ up_channelA.label Up A Channel
 up_channelB.label Up B Channel
 up_channelC.label Up C Channel
 
+multigraph surfboard_frequencies
+graph_title Moto Surfboard Frequencies
+graph_category network
+graph_vlabel Hz
+graph_order down_freqA down_freqB down_freqC down_freqD up_freqA up_freqB up_freqC
+
+down_freqA.label Down A Frequency
+down_freqA.vlabel Hz
+down_freqB.label Down B Frequency
+down_freqB.vlabel Hz
+down_freqC.label Down C Frequency
+down_freqC.vlabel Hz
+down_freqD.label Down D Frequency
+down_freqD.vlabel Hz
+up_freqA.label Up A Frequency
+up_freqA.vlabel Hz
+up_freqB.label Up B Frequency
+up_freqB.vlabel Hz
+up_freqC.label Up C Frequency
+up_freqC.vlabel Hz
+
 multigraph surfboard_stats
 graph_title Moto Surfboard Stats
 graph_category network
