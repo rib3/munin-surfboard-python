@@ -52,6 +52,20 @@ graphs = [
         ],
     },
     {
+        'graph': 'channels',
+        'title': "Moto Surfboard Channels",
+        'vlabel': 'channel',
+        'category': 'network',
+        'points': [
+            ('down.channel', OrderedDict([
+                ('label', 'Down {id} Channel'),
+            ])),
+            ('up.channel', OrderedDict([
+                ('label', 'Up {id} Channel'),
+            ])),
+        ],
+    },
+    {
         'graph': 'stats',
         'title': "Moto Surfboard Stats",
         'vlabel': 'codewords',
