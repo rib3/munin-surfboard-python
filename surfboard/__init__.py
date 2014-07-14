@@ -30,11 +30,11 @@ graphs = [
         'category': 'network',
         'points': [
             ('down.snr', OrderedDict([
-                ('label', 'Downstream {id} SnR'),
+                ('label', 'Down {id} SnR'),
                 ('vlabel', 'dB'),
             ])),
             ('up.power', OrderedDict([
-                ('label', 'Upstream {id} Power'),
+                ('label', 'Up {id} Power'),
                 ('vlabel', 'dBmV'),
             ])),
         ],
@@ -46,7 +46,7 @@ graphs = [
         'category': 'network',
         'points': [
             ('down.power', OrderedDict([
-                ('label', 'Downstream {id} Power'),
+                ('label', 'Down {id} Power'),
                 ('vlabel', 'dBmV'),
             ])),
         ],
