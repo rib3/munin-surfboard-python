@@ -66,6 +66,22 @@ graphs = [
         ],
     },
     {
+        'graph': 'frequencies',
+        'title': "Moto Surfboard Frequencies",
+        'vlabel': 'Hz',
+        'category': 'network',
+        'points': [
+            ('down.freq', OrderedDict([
+                ('label', 'Down {id} Frequency'),
+                ('vlabel', 'Hz'),
+            ])),
+            ('up.freq', OrderedDict([
+                ('label', 'Up {id} Frequency'),
+                ('vlabel', 'Hz'),
+            ])),
+        ],
+    },
+    {
         'graph': 'stats',
         'title': "Moto Surfboard Stats",
         'vlabel': 'codewords',
