@@ -20,7 +20,7 @@ __all__ = (
 DEFAULT_URL = 'http://192.168.100.1/cmSignalData.htm'
 
 # Used to label channels
-GRAPH_IDS = string.uppercase
+GRAPH_IDS = string.ascii_uppercase
 
 graphs = [
     {
