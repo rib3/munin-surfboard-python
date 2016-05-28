@@ -126,7 +126,7 @@ def column_getter(table, fields, min_columns=0):
         return columns
     return func
 
-def load_data(source, parser=None):
+def load_data(source, parser='lxml'):
     if hasattr(source, 'startswith') and source.startswith('http'):
         content = urlopen(source)
     else:
