@@ -215,38 +215,3 @@ def test(data):
         'up': data.up_by_column(),
         'stats': data.stats_by_column(),
     })
-
-class GraphPoint(object):
-    """GraphPoint object, can be used to generate configs or values"""
-    def __init__(self, table, point, id, extra, value=None):
-        self.table = table
-        self.point = point
-        self.id = id
-        self.extra = extra
-        self._value = value
-
-    def __repr__(self):
-        return ('GraphPoint(table={self.table!r}'
-                ', point={self.point!r}'
-                ', id={self.id!r})').format(self=self)
-
-    @property
-    def source(self):
-        return "{table}_{point}{id}".format(**self.__dict__)
-
-    def config(self):
-        config = []
-        for field, val in self.extra:
-            val = val.format(**self.__dict__)
-            config.append("{}.{} {}".format(self.source, field, val))
-
-        return '\n'.join(config)
-
-    @property
-    def value(self):
-        if self._value is None:
-            return 'U' # Munin code for unavailable
-        return self._value
-
-    def value_line(self):
-        return "{}.value {}".format(self.source, self.value)
