@@ -138,7 +138,7 @@ class GraphPoint(object):
     def config(self):
         config = []
         for field, val in self.extra:
-            val = val.format(**self.__dict__)
+            val = val.format(id=self.id)
             config.append("{self.source}.{} {}".format(field, val, self=self))
 
         return '\n'.join(config)
