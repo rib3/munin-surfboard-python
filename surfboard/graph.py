@@ -1,8 +1,6 @@
-from collections import OrderedDict
-
-from parse import *
-
 import string
+from collections import OrderedDict
+from parse import *
 
 __all__ = (
     'graphs',
