@@ -49,18 +49,19 @@ def values(data):
     return '\n'.join(values)
 
 def handle_args(args=None):
-    MODES = 'test', 'config'
     args = parser.parse_args(args)
+    munge_args(args)
+    return args
 
+def munge_args(args):
+    MODES = 'test', 'config'
     if not args.mode in MODES:
-        # Maybe it's html
+        # Maybe it's the html argument
         args.html = args.mode
         args.mode = None
 
     if args.html is None:
         args.html = DEFAULT_URL
-
-    return args
 
 def main():
     args = handle_args()
