@@ -57,6 +57,10 @@ def handle_args(args=None):
     return args
 
 def munge_args(args):
+    """
+    Handle munin plugin `config` optional first argument
+    (I wish it was `--config`)
+    """
     MODES = 'test', 'config'
     if args.mode is not None:
         if args.mode not in MODES:
