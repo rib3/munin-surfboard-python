@@ -16,7 +16,7 @@ DEFAULT_URL = 'http://192.168.100.1/cmSignalData.htm'
 
 parser = argparse.ArgumentParser()
 parser.add_argument('mode', nargs='?')
-parser.add_argument('html', nargs='?')
+parser.add_argument('html', nargs='?', default=DEFAULT_URL)
 
 def test(data):
     for section, subs in SignalData.tables.items():
@@ -55,13 +55,11 @@ def handle_args(args=None):
 
 def munge_args(args):
     MODES = 'test', 'config'
-    if not args.mode in MODES:
-        # Maybe it's the html argument
-        args.html = args.mode
-        args.mode = None
-
-    if args.html is None:
-        args.html = DEFAULT_URL
+    if args.mode is not None:
+        if args.mode not in MODES:
+            # Maybe it's the html argument
+            args.html = args.mode
+            args.mode = None
 
 def main():
     args = handle_args()
