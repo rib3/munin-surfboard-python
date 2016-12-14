@@ -133,13 +133,13 @@ class GraphPoint(object):
 
     @property
     def source(self):
-        return "{table}_{point}{id}".format(**self.__dict__)
+        return "{self.table}_{self.point}{self.id}".format(self=self)
 
     def config(self):
         config = []
         for field, val in self.extra:
             val = val.format(**self.__dict__)
-            config.append("{}.{} {}".format(self.source, field, val))
+            config.append("{self.source}.{} {}".format(field, val, self=self))
 
         return '\n'.join(config)
 
@@ -150,7 +150,7 @@ class GraphPoint(object):
         return self._value
 
     def value_line(self):
-        return "{}.value {}".format(self.source, self.value)
+        return "{self.source}.value {self.value}".format(self=self)
 
 
 def setup_graph_points(data, graph):
