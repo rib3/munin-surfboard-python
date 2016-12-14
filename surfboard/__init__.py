@@ -38,7 +38,8 @@ def test(data):
 
 
 def config(data):
-    return '\n\n'.join(map(partial(config_graph, data), graphs))
+    graph_configs = map(partial(config_graph, data), graphs)
+    return '\n\n'.join(graph_configs)
 
 def values(data):
     values = []
