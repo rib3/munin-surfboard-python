@@ -19,6 +19,7 @@ parser.add_argument('mode', nargs='?')
 parser.add_argument('html', nargs='?', default=DEFAULT_URL)
 
 def test(data):
+    print "---INPUT---"
     for section, subs in SignalData.tables.items():
         print "{}:".format(section)
         rows = [row[0] for row in subs.get('rows', [])]
@@ -27,6 +28,8 @@ def test(data):
             vals = getattr(data, method)()
             print "\t{}: {}".format(sub, map(str, vals))
 
+    print
+    print "---OUTPUT---"
     pprint({
         'down': data.down_by_column(),
         'up': data.up_by_column(),
