@@ -1,10 +1,8 @@
+import argparse
 from functools import partial
 from pprint import pprint
-
 from parse import *
 from graph import *
-
-import argparse
 
 __all__ = (
     'DEFAULT_URL', 'handle_args', 'config', 'values',
