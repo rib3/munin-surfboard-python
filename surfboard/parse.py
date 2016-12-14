@@ -200,18 +200,3 @@ def setup_signal_data():
             column_getter(table, [r[0] for r in rows], min_columns))
 
 setup_signal_data()
-
-def test(data):
-    for section, subs in SignalData.tables.items():
-        print "{}:".format(section)
-        rows = [row[0] for row in subs.get('rows', [])]
-        for sub in rows:
-            method = pluralize('_'.join((section, sub)))
-            vals = getattr(data, method)()
-            print "\t{}: {}".format(sub, map(str, vals))
-
-    pprint({
-        'down': data.down_by_column(),
-        'up': data.up_by_column(),
-        'stats': data.stats_by_column(),
-    })
