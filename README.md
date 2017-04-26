@@ -42,9 +42,22 @@ by downstream link
 ./surfboard.sh
 ```
 
-## munin config output
+### with static .htm file
+
+```
+./surfboard.sh testdata/working.htm
+```
+
+## Munin config
+
 ```
 ./surfboard.sh config
+```
+
+### with static .htm file
+
+```
+./surfboard.sh config testdata/working.htm
 ```
 
 # Tests
