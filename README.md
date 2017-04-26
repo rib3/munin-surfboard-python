@@ -50,5 +50,6 @@ by downstream link
 # Tests
 
 ```
-./test.py
+# launch test.py inside virtualenv
+./test.sh
 ```
