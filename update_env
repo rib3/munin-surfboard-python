@@ -1,10 +1,11 @@
 #!/bin/sh
 
 ENV_DIR='venv'
+PYTHON='python2.7'
 REQUIREMENTS='requirements.txt'
 
 test -e "${REQUIREMENTS}" || exit
 
-test -d "${ENV_DIR}" || virtualenv "${ENV_DIR}" -p python2.7 --no-site-packages || exit
+test -d "${ENV_DIR}" || virtualenv "${ENV_DIR}" -p "${PYTHON}" --no-site-packages || exit
 
 "${ENV_DIR}/bin/pip" install -r "${REQUIREMENTS}"
