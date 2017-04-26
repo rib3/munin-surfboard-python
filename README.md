@@ -23,3 +23,32 @@ by downstream link
 * unerrored
 * correctable
 * uncorrectable
+
+
+# Setup
+
+## TODO easy install setup
+
+## setup/update virtual env
+
+```
+./update_env
+```
+
+# Running
+
+```
+# launch surfboard.py inside virtualenv
+./surfboard.sh
+```
+
+## munin config output
+```
+./surfboard.sh config
+```
+
+# Tests
+
+```
+./test.py
+```
