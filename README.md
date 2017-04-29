@@ -3,6 +3,13 @@
 [Munin](http://munin-monitoring.org/) plugin
 for monitoring Motorola SB6121 cable modems
 
+# Code
+
+Data is scraped from web interface and arranged into objects defined by
+`SignalData.parse` in [parse.py](surfboard/parse.py)
+
+Mapping of signal to munin data is defined by `graphs` in [graph.py](surfboard/graph.py)
+
 # Stats
 
 #### downstream
